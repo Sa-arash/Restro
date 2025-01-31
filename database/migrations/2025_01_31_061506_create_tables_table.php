@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('code');
             $table->enum('status', ['use', 'free']);
             $table->text('description')->nullable();
+            $table->string('qr_code');
+            $table->text('options');
             $table->softDeletes();
             $table->timestamps();
         });
