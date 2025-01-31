@@ -38,6 +38,7 @@ class CommentResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('')->rowIndex(),
                 Tables\Columns\TextColumn::make('user.name')->label('کاربر')->color('a')->badge()->sortable()->alignCenter(),
                 Tables\Columns\TextColumn::make('product.title')->label('محصول')->color('a')->badge()->sortable()->alignCenter(),
                 Tables\Columns\IconColumn::make('is_show')->label('وضعیت')->boolean()->alignCenter(),
@@ -85,8 +86,6 @@ class CommentResource extends Resource
     {
         return [
             'index' => Pages\ListComments::route('/'),
-            'create' => Pages\CreateComment::route('/create'),
-            'edit' => Pages\EditComment::route('/{record}/edit'),
         ];
     }
 }

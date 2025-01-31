@@ -14,5 +14,6 @@ class Contact extends Model
         'name',
         'phone',
         'comment',
+        'read_at',
     ];
 }
