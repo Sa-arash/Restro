@@ -12,7 +12,7 @@ class Invoice extends Model
     protected $guarded = ['id'];
     protected $fillable = [
 
-        'fullname',
+        'name',
         'phone',
         'user_id',
         'table_id',

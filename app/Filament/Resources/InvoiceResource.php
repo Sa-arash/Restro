@@ -6,7 +6,9 @@ use App\Filament\Resources\InvoiceResource\Pages;
 use App\Filament\Resources\InvoiceResource\RelationManagers;
 use App\Models\Invoice;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -23,13 +25,19 @@ class InvoiceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('fullname')
+                Section::make('userInfo')->label('اطلاعات کاربر')
+                ->schema([
+                    Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->required(),
-                Forms\Components\TextInput::make('user_id')
-                    ->numeric(),
+                Forms\Components\Select::make('user_id')
+                ->relationship('user','name')->live()->afterStateUpdated(function(Set $set){
+                    $set('name');
+                })->columns(3),
+            ]),
+               
                 Forms\Components\TextInput::make('table_id')
                     ->required()
                     ->numeric(),
@@ -51,12 +59,13 @@ class InvoiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('fullname')
+                
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('table_id')
                     ->numeric()
