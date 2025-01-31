@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('price');  
             $table->bigInteger('count');  
             $table->bigInteger('discount')->nullable();  
-            $table->bigInteger('total');  
+            $table->bigInteger('total')->nullable();  
             $table->softDeletes();  
             $table->timestamps();  
         });

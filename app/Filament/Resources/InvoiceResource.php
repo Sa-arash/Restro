@@ -15,6 +15,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
@@ -25,6 +26,10 @@ class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
 
+    protected static ?string $label = "سفارش";
+    protected static ?string $pluralLabel = 'سفارش ها';
+    protected static ?string $navigationLabel = 'سفارش ها';
+    
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -35,13 +40,13 @@ class InvoiceResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('user_id')->label('انتخاب کاربر')
                             ->relationship('user', 'name')->live()->afterStateUpdated(function (Set $set, $state) {
-                                if($state){
-                                $user = User::find($state);
-                                $set('name', $user->name);
-                                $set('phone', '911');
-                                }else{
+                                if ($state) {
+                                    $user = User::find($state);
+                                    $set('name', $user->name);
+                                    $set('phone', '911');
+                                } else {
                                     $set('name', null);
-                                $set('phone', null);
+                                    $set('phone', null);
                                 }
                             })->searchable()->preload(),
                         Forms\Components\TextInput::make('name')->label('نام')
@@ -70,29 +75,36 @@ class InvoiceResource extends Resource
 
 
                 Repeater::make('products')->relationship('items')
-                ->label('محصولات')
-               
+                    ->label('محصولات')
+
                     ->schema([
                         Select::make('product_id')->label('محصول')
                             ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set, $state) {
-                                if($state){
+                                if ($state) {
                                     $product = Product::find($state);
-                                    if($product->discount){
-                                        $set('price',number_format(makeDiscount($product->price,$product->discount)));
-                                        $set('discount',$product->discount);
-                                    }else{
+                                    if ($product->discount) {
+                                        $set('price', number_format(makeDiscount($product->price, $product->discount)));
+                                        $set('discount', $product->discount);
+                                    } else {
                                         $set('price', number_format($product->price));
                                     }
-                                }else{
-                                    $set('price',null);
-                                        $set('discount',null);
+                                } else {
+                                    $set('price', null);
+                                    $set('discount', null);
                                 }
                             })->searchable()->preload()
                             ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                             ->required(),
 
                         TextInput::make('price')->label('قیمت')
-                        ->readOnly()
+                        
+                            ->live(true)->afterStateUpdated(function (Get $get, Set $set, $state) {
+                                if ($get('product_id')) {
+                                    // dd($state);
+                                    $product = Product::find($get('product_id'));
+                                    $set('discount', getDiscountPercentage($product->price, str_replace(',','',$state)));
+                                }
+                            })
                             ->required()->mask(RawJs::make('$money($input)'))->stripCharacters(','),
 
                         TextInput::make('count')->label('تعداد')
@@ -103,25 +115,26 @@ class InvoiceResource extends Resource
                         TextInput::make('discount')->label('درصد تخفیف')
                             ->default(0)
                             ->rules([
-                                fn (): Closure => function (string $attribute, $value, Closure $fail) {
+                                fn(): Closure => function (string $attribute, $value, Closure $fail) {
                                     if ($value < 0 || $value > 100) {
                                         $fail('مقدار :attribute باید بین 0 تا 100 باشد.');
                                     }
-                                }])
+                                }
+                            ])
                             ->required(),
-                       
+
 
 
 
 
                     ])->columns(4)->columnSpanFull(),
 
-                Forms\Components\TextInput::make('total_discount')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('total_amount')
-                    ->required()
-                    ->numeric(),
+                // Forms\Components\TextInput::make('total_discount')
+                //     ->required()
+                //     ->numeric(),
+                // Forms\Components\TextInput::make('total_amount')
+                //     ->required()
+                //     ->numeric(),
             ]);
     }
 

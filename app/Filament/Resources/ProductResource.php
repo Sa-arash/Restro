@@ -47,13 +47,14 @@ class ProductResource extends Resource
                         Tabs\Tab::make('تخفیف')
                             ->schema([
                                 Forms\Components\TextInput::make('discount')->label('درصد تخفیف')
-                                ->rules([
-                                    fn (): Closure => function (string $attribute, $value, Closure $fail) {
-                                        if ($value < 0 || $value > 100) {
-                                            $fail('مقدار :attribute باید بین 0 تا 100 باشد.');
+                                    ->rules([
+                                        fn(): Closure => function (string $attribute, $value, Closure $fail) {
+                                            if ($value < 0 || $value > 100) {
+                                                $fail('مقدار :attribute باید بین 0 تا 100 باشد.');
+                                            }
                                         }
-                                    }])
-                                ->maxLength(255)->default(null),
+                                    ])
+                                    ->maxLength(255)->default(null),
                                 Forms\Components\DatePicker::make('discount_end')->label('تاریخ پایان تخفیف'),
                             ])->columns(),
 
@@ -67,15 +68,15 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('')->rowIndex(),
                 Tables\Columns\ImageColumn::make('images')->alignCenter()->label('تصویر')->width(70)->height(70)->alignCenter(),
-                Tables\Columns\TextColumn::make('title')->tooltip(fn($record)=>$record->description)->label('عنوان محصول')->searchable()->alignCenter(),
+                Tables\Columns\TextColumn::make('title')->tooltip(fn($record) => $record->description)->label('عنوان محصول')->searchable()->alignCenter(),
                 Tables\Columns\TextColumn::make('category.title')->label('دسته بندی')->sortable()->alignCenter(),
                 Tables\Columns\TextColumn::make('price')->label('قیمت ')->numeric()->searchable(),
-//                Tables\Columns\TextColumn::make('discount')
-//                    ->searchable(),
-//                Tables\Columns\TextColumn::make('discount_end')
-//                    ->date()
-//                    ->sortable(),
-                Tables\Columns\TextColumn::make('inventory')->description(fn($record)=>"حداقل موجودی : ".$record->min_inventory )->label('موجودی')->alignCenter()->searchable(),
+                //                Tables\Columns\TextColumn::make('discount')
+                //                    ->searchable(),
+                //                Tables\Columns\TextColumn::make('discount_end')
+                //                    ->date()
+                //                    ->sortable(),
+                Tables\Columns\TextColumn::make('inventory')->description(fn($record) => "حداقل موجودی : " . $record->min_inventory)->label('موجودی')->alignCenter()->searchable(),
             ])
             ->filters([
                 //
