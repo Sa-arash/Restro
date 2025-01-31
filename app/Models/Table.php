@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Table extends Model
 {
     /** @use HasFactory<\Database\Factories\TableFactory> */
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $guarded = ['id'];
     protected $fillable = [
@@ -21,7 +22,7 @@ class Table extends Model
         'updated_at',
     ];
 
-    public function category(){
-        $this->belongsTo(Category::class , 'category_id');
+    public function invoices(){
+        $this->hasMany(Category::class , 'category_id');
     }
 }
