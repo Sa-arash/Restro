@@ -10,7 +10,7 @@ class ProductInvoice extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductInvoiceFactory> */
     use HasFactory, SoftDeletes;
-
+    protected $guarded = ['id'];
     protected $fillable = [
         'invoice_id',
         'product_id',
