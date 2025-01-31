@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('copons', function (Blueprint $table) {
-            $table->id();  
+            $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('token');
             $table->date('start_date');
             $table->date('end_date');
             $table->bigInteger('min_price');
             $table->bigInteger('max_price');
-            $table->enum('status', ['use', 'free']);
-            $table->text('description');
+            $table->integer('discount');
+            $table->enum('status', ['use', 'free'])->default('free');
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
