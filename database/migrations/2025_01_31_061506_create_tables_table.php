@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('code');
             $table->enum('status', ['use', 'free']);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
