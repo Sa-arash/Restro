@@ -17,12 +17,13 @@ class Table extends Model
         'code',
         'status',
         'description',
-        'deleted_at',
-        'created_at',
-        'updated_at',
+        'qr_code',
+        'options',
     ];
     protected $casts = [
-        'status' => FreeUse::class, 
+        'status' => FreeUse::class,
+        'options' => 'array'
+
     ];
 
     public function invoices(){

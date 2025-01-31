@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('min_price');
             $table->bigInteger('max_price');
             $table->integer('discount');
+
             $table->enum('status', ['use', 'free'])->default('free');
             $table->text('description')->nullable();
             $table->softDeletes();

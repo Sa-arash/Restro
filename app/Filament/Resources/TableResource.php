@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class TableResource extends Resource
 {
@@ -26,44 +27,33 @@ class TableResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')->label('عنوان')
-                    ->required(),
-                Forms\Components\TextInput::make('code')->label('کد میز')
-                    ->required(),
-                Forms\Components\ToggleButtons::make('status')
-                    ->default('Free')
-                    ->options(FreeUse::class)->label('وضعیت')->inline()
-                    ->required(),
-                Forms\Components\Textarea::make('description')->label('توضیحات')
-                    ->columnSpanFull(),
-            ])->columns(3);
+                Forms\Components\TextInput::make('title')->label('عنوان')->required(),
+                Forms\Components\TextInput::make('code')->label('کد میز')->required(),
+                Forms\Components\Hidden::make('qr_code')->default(fn()=>Str::random(6))->required(),
+                Forms\Components\Textarea::make('description')->label('توضیحات')->columnSpanFull(),
+
+//                \LaraZeus\Qr\Components\Qr::make('qr_code')
+//                    // to open the designer as slide over instead of a modal.
+//                    // Comment it out if you prefer the modal.
+//                    ->asSlideOver()
+//                    // you can set the column you want to save the QR design options, you must cast it to array in your model
+//                    ->optionsColumn('options')
+//
+//                    // set the icon for the QR action
+//                    ->actionIcon('heroicon-s-building-library')->default(['qr_code'=>'dawa'])->disabled()
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')->label('عنوان')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('code')->label('کد میز')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')->label('وضعیت')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('desctiption')->label('وضعیت')
-                    ->label('توضیحات')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('')->rowIndex(),
+                Tables\Columns\TextColumn::make('title')->label('عنوان')->searchable(),
+                Tables\Columns\TextColumn::make('code')->label('کد میز')->searchable(),
+                Tables\Columns\TextColumn::make('status')->badge()->label('وضعیت')->searchable(),
+                Tables\Columns\TextColumn::make('description')->label('توضیحات'),
+
             ])
             ->filters([
                 //
@@ -72,6 +62,13 @@ class TableResource extends Resource
                 Tables\Actions\EditAction::make()->label(''),
                 Tables\Actions\ViewAction::make()->label(''),
                 Tables\Actions\DeleteAction::make()->label(''),
+                Tables\Actions\Action::make('qr-action')
+                    ->fillForm(fn( $record) => [
+                        'qr-options' => \LaraZeus\Qr\Facades\Qr::getDefaultOptions(),// or $record->qr-options
+                        'qr-data' => $record->url
+                    ])
+                    ->form(\LaraZeus\Qr\Facades\Qr::getFormSchema('qr-data', 'qr-options'))
+                    ->action(fn($data) => dd($data)),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
