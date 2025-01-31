@@ -14,15 +14,15 @@ enum FreeUse:string implements HasColor,HasLabel
     public function getLabel(): ?string
     {
         return match ($this){
-            self::Free => 'آزاد',
-            self::Use => 'درحال استفاده',
+            self::Free => 'استفاده نشده',
+            self::Use => ' استفاده شده',
         };
     }
     public function getColor(): string|array|null
     {
         return match($this){
-            self::Free => 'success',
-            self::Use => 'danger',
+            self::Free => 'danger',
+            self::Use => 'success',
 
         };
     }
