@@ -23,28 +23,21 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
+                Forms\Components\FileUpload::make('images')->image()->label('تصویر')->required()->columnSpanFull(),
+                Forms\Components\TextInput::make('title')->label('عنوان محصول')->required()->maxLength(255),
+                Forms\Components\Select::make('category_id')->label(' دسته بندی')->required()->relationship('category','title')->preload()->searchable(),
+                Forms\Components\TextInput::make('price')->label('قیمت')->required()->maxLength(64),
+                Forms\Components\TextInput::make('inventory')->label('موجودی')->numeric()->required()->maxLength(64),
+                Forms\Components\TextInput::make('description')->label('توضیحات')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('images')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('category_id')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->maxLength(255),
+
+
                 Forms\Components\TextInput::make('discount')
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\DatePicker::make('discount_end'),
-                Forms\Components\TextInput::make('inventory')
-                    ->required()
-                    ->maxLength(255),
+
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
