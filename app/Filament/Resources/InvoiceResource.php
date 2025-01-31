@@ -29,7 +29,7 @@ class InvoiceResource extends Resource
     protected static ?string $label = "سفارش";
     protected static ?string $pluralLabel = 'سفارش ها';
     protected static ?string $navigationLabel = 'سفارش ها';
-    
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     public static function form(Form $form): Form
@@ -49,28 +49,12 @@ class InvoiceResource extends Resource
                                     $set('phone', null);
                                 }
                             })->searchable()->preload(),
-                        Forms\Components\TextInput::make('name')->label('نام')
-                            ->required(),
-                        Forms\Components\TextInput::make('phone')->label('شماره تلفن')
-                            ->tel()
-                            ->required(),
-
-                        Forms\Components\Select::make('table_id')
-                            ->label('میز')
-                            ->relationship('table', 'title')->searchable()->preload()
-                            ->required(),
-
-                        Forms\Components\DatePicker::make('order_date')
-                            ->default(now())
-                            ->label('تاریخ سفارش')
-                            ->required(),
-                        Forms\Components\DatePicker::make('payment_date')
-                            ->default(now())
-                            ->label('تاریخ خرید'),
-                        Forms\Components\ToggleButtons::make('status')
-                            ->default('order')
-                            ->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)
-                            ->required(),
+                        Forms\Components\TextInput::make('name')->label('نام')->required(),
+                        Forms\Components\TextInput::make('phone')->minLength(11)->maxLength(11)->prefixIcon('heroicon-s-device-phone-mobile')->prefixIconColor('icon')->label('شماره تلفن')->tel()->required(),
+                        Forms\Components\Select::make('table_id')->prefixIcon('chair')->prefixIconColor('icon')->label('میز')->relationship('table', 'title')->searchable()->preload()->required(),
+                        Forms\Components\DatePicker::make('order_date')->default(now())->label('تاریخ ثبت سفارش')->jalali()->required(),
+                        Forms\Components\DatePicker::make('payment_date')->jalali()->default(now())->label('تاریخ پرداخت'),
+                        Forms\Components\ToggleButtons::make('status')->grouped()->default('order')->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)->required(),
                     ])->columns(4),
 
 
@@ -97,7 +81,7 @@ class InvoiceResource extends Resource
                             ->required(),
 
                         TextInput::make('price')->label('قیمت')
-                        
+
                             ->live(true)->afterStateUpdated(function (Get $get, Set $set, $state) {
                                 if ($get('product_id')) {
                                     // dd($state);
@@ -147,9 +131,7 @@ class InvoiceResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')->label('شماره تلفن')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user.name')->label('کاربر')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.name')->label('کاربر')->default('ندارد')->badge()->color('a')->numeric()->sortable(),
                 Tables\Columns\TextColumn::make('table.title')->label('میز')
                     ->numeric()
                     ->sortable(),

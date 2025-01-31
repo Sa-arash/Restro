@@ -7,6 +7,8 @@ use App\Filament\Resources\CommentResource\RelationManagers;
 use App\Models\Comment;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -41,9 +43,9 @@ class CommentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('')->rowIndex(),
-                Tables\Columns\TextColumn::make('user.name')->label('کاربر')->color('a')->badge()->sortable()->alignCenter(),
-                Tables\Columns\TextColumn::make('product.title')->label('محصول')->color('a')->badge()->sortable()->alignCenter(),
-                Tables\Columns\IconColumn::make('is_show')->label('وضعیت')->boolean()->alignCenter(),
+                Tables\Columns\TextColumn::make('user.name')->url(fn($record)=>UserResource::getUrl('view',['record'=>$record->user_id]))->label('کاربر')->color('a')->badge()->sortable()->alignCenter(),
+                Tables\Columns\TextColumn::make('product.title')->url(fn($record)=>ProductResource::getUrl('view',['record'=>$record->product_id]))->label('محصول')->color('a')->badge()->sortable()->alignCenter(),
+                Tables\Columns\TextColumn::make('is_show')->badge()->label('وضعیت')->alignCenter(),
                 Tables\Columns\TextColumn::make('comment')->tooltip(fn($record)=>$record->comment)->limit(30)->label(' متن ')->alignCenter(),
                 Tables\Columns\TextColumn::make('reply')->tooltip(fn($record)=>$record->reply)->limit(30)->label('متن ادمین')->alignCenter(),
                 RatingStar::make('star')->label('امتیاز')->alignCenter(),
@@ -53,7 +55,21 @@ class CommentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->color('show')->tooltip('نمایش نظر کاربر')->infolist(function ($record){
+                    $record->update(['read_at'=>now()]);
+                    return [
+                        Section::make([
+                            TextEntry::make('user.name')->label('نام و نام خانوادگی'),
+                            TextEntry::make('product.title')->label('محصول'),
+                            \IbrahimBougaoua\FilamentRatingStar\Entries\Components\RatingStar::make('star')->label('امتیاز'),
+                            TextEntry::make('comment')->markdown()->label('متن')->columnSpanFull(),
+                            TextEntry::make('reply')->label('نظر ادمین')->columnSpanFull(),
+                            TextEntry::make('created_at')->jalaliDateTime()->label('تاریخ ثبت'),
+                            TextEntry::make('read_at')->jalaliDateTime()->label('تاریخ خواندن'),
+                        ])->columns(3)
+                    ];
+                }),
+
                 Tables\Actions\Action::make('send')->fillForm(function ($record){
                     return [
                         'is_show'=>$record->is_show,

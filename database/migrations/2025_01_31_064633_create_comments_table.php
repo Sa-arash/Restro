@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('comment');
             $table->string('star');
             $table->boolean('is_show')->default(true);
+            $table->timestamp('read_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

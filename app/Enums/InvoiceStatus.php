@@ -17,7 +17,7 @@ case Cancele = 'cancele';
     {
         return match ($this){
             self::Payed => 'پرداخت شده',
-            self::Order => 'شفارش داده شده',
+            self::Order => 'سفارش داده شده',
             self::Pending => 'در حال انتظار',
             self::Cancele => 'لغو شده',
         };

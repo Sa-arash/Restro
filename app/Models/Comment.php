@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Enums\IsShow;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    
+
     use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
     protected $fillable = [
@@ -18,10 +19,12 @@ class Comment extends Model
         'comment',
         'star',
         'is_show',
+        'read_at',
     ];
 
     protected $casts = [
-        'reply' => 'array', 
+        'reply' => 'array',
+        'is_show'=>IsShow::class
     ];
 
     public function user()

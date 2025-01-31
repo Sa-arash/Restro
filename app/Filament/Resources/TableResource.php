@@ -21,7 +21,7 @@ class TableResource extends Resource
     protected static ?string $label = "میز";
     protected static ?string $pluralLabel = 'میز ها';
     protected static ?string $navigationLabel = 'میز ها';
-    protected static ?string $navigationIcon = 'heroicon-m-square-2-stack';
+    protected static ?string $navigationIcon = 'chair';
 
     public static function form(Form $form): Form
     {
