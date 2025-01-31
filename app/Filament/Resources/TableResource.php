@@ -36,7 +36,7 @@ class TableResource extends Resource
                     ->required(),
                 Forms\Components\Textarea::make('description')->label('توضیحات')
                     ->columnSpanFull(),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
