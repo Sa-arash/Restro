@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('images');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->bigInteger('price');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('discount')->nullable();
             $table->date('discount_end')->nullable();
             $table->bigInteger('inventory');
+            $table->bigInteger('min_inventory');
             $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
