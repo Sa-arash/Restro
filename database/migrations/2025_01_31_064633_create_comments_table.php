@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('copons', function (Blueprint $table) {
-            $table->id();  
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->json('reply')->nullable();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('token');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->bigInteger('min_price');
-            $table->bigInteger('max_price');
-            $table->enum('status', ['use', 'free']);
-            $table->text('description');
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->text('comment');
+            $table->string('star');
+            $table->boolean('is_show')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('copons');
+        Schema::dropIfExists('comments');
     }
 };

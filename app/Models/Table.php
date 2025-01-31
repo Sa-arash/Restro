@@ -23,6 +23,6 @@ class Table extends Model
     ];
 
     public function invoices(){
-        $this->hasMany(Category::class , 'category_id');
+        return $this->hasMany(Invoice::class , 'table_id');
     }
 }

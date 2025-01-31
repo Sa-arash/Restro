@@ -10,7 +10,7 @@ class Copon extends Model
 {
     /** @use HasFactory<\Database\Factories\CoponFactory> */
     use HasFactory,SoftDeletes;
-
+    protected $guarded = ['id'];
     protected $fillable = [
         'user_id',
         'token',
