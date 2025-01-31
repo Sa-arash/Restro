@@ -143,28 +143,28 @@ class InvoiceResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')->label('نام')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                Tables\Columns\TextColumn::make('phone')->label('شماره تلفن')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('user.name')->label('کاربر')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('table_id')
+                Tables\Columns\TextColumn::make('table.title')->label('میز')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('order_date')
+                Tables\Columns\TextColumn::make('order_date')->label('تاریخ سفارش')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('payment_date')
+                Tables\Columns\TextColumn::make('payment_date')->label('تاریخ پرداخت')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('status')->label('وضعیت')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('total_discount')
+                Tables\Columns\TextColumn::make('total_discount')->label('مجموع تخفیف')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('total_amount')
+                Tables\Columns\TextColumn::make('total_amount')->label('مجموع قیمت')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
@@ -185,6 +185,7 @@ class InvoiceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
