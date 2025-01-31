@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 use IbrahimBougaoua\FilamentRatingStar\Columns\Components\RatingStar;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Actions\Action;
+
 
 class CommentResource extends Resource
 {
@@ -65,7 +67,8 @@ class CommentResource extends Resource
                         'is_show'=>$data['is_show'],
                         'reply'=>$data['reply'],
                     ]);
-                    Notification::make('change')->success()->title('ثبت شد ')->send();
+
+                    Notification::make('change')->success()->title('وضعیت نظر ثبت شد ')->send();
                 })->requiresConfirmation()
             ])
             ->bulkActions([
