@@ -22,9 +22,7 @@ class Product extends Model
         'discount_end',
         'inventory',
         'slug',
-        'deleted_at',
-        'created_at',
-        'updated_at',
+        'min_inventory',
     ];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -39,7 +39,7 @@ class CategoryResource extends Resource
         return $table->defaultSort('sort')->reorderable('sort')
             ->columns([
                 Tables\Columns\TextColumn::make('')->rowIndex(),
-                Tables\Columns\ImageColumn::make('image')->width(70)->height(70)->alignCenter(),
+                Tables\Columns\ImageColumn::make('image')->label('تصویر')->width(70)->height(70)->alignCenter(),
                 Tables\Columns\TextColumn::make('title')->label('عنوان')->alignCenter()->searchable(),
                 Tables\Columns\TextColumn::make('slug')->label('اسلاگ')->searchable(),
                 Tables\Columns\TextColumn::make('parent.title')->label('دسته بندی والد')->sortable(),
