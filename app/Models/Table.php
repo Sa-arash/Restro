@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Table extends Model
 {
+    /** @use HasFactory<\Database\Factories\TableFactory> */
     use HasFactory;
-    /** @use HasFactory<\Database\Factories\CategoryFactory> */
 
     protected $guarded = ['id'];
     protected $fillable = [
         'title',
-        'images',
+        'code',
+        'status',
         'description',
-        'category_id',
-        'price',
-        'discount',
-        'discount_end',
-        'inventory',
-        'slug',
         'deleted_at',
         'created_at',
         'updated_at',
