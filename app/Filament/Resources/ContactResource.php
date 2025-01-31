@@ -19,7 +19,7 @@ class ContactResource extends Resource
     protected static ?string $label="تماس با ما";
     protected static ?string $pluralLabel="تماس با ما";
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-c-chat-bubble-left-right';
 
     public static function form(Form $form): Form
     {

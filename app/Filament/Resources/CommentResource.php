@@ -21,7 +21,7 @@ class CommentResource extends Resource
     protected static ?string $label="نظر";
     protected static ?string $pluralLabel="نظرات";
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-chat-bubble-oval-left';
 
     public static function form(Form $form): Form
     {

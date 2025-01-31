@@ -30,7 +30,7 @@ class InvoiceResource extends Resource
     protected static ?string $pluralLabel = 'سفارش ها';
     protected static ?string $navigationLabel = 'سفارش ها';
     
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     public static function form(Form $form): Form
     {

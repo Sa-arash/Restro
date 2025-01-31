@@ -22,7 +22,7 @@ class CoponResource extends Resource
     protected static ?string $label='کد تخفیف  ';
     protected static ?string $pluralLabel='کد های تخفیف ';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-c-receipt-percent';
 
     public static function form(Form $form): Form
     {
