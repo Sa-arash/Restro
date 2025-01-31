@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('token');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('min_price');
-            $table->string('max_price');
+            $table->bigInteger('min_price');
+            $table->bigInteger('max_price');
             $table->enum('status', ['use', 'free']);
-            $table->integer('description');
+            $table->text('description');
             $table->softDeletes();
             $table->timestamps();
         });
