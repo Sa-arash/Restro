@@ -26,12 +26,14 @@ class Category extends Model
 
 
 
-    public function parent(){
-        $this->belongsTo(Category::class,'parent_id');
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+       return $this->belongsTo(Category::class,'parent_id');
     }
 
-    public function childs(){
-        $this->hasMany(Category::class,'parent_id');
+    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+       return $this->hasMany(Category::class,'parent_id');
     }
 
 }

@@ -11,6 +11,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -30,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
                 url: asset('css/font.css'),
                 provider: LocalFontProvider::class
             )
-            ->id('admin')
+            ->id('admin')->maxContentWidth(MaxWidth::Full)
             ->path('admin')
             ->login()
             ->colors([
