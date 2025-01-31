@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
@@ -45,7 +46,14 @@ class ProductResource extends Resource
                             ])->columns(),
                         Tabs\Tab::make('تخفیف')
                             ->schema([
-                                Forms\Components\TextInput::make('discount')->label('درصد تخفیف')->maxLength(255)->default(null),
+                                Forms\Components\TextInput::make('discount')->label('درصد تخفیف')
+                                ->rules([
+                                    fn (): Closure => function (string $attribute, $value, Closure $fail) {
+                                        if ($value < 0 || $value > 100) {
+                                            $fail('مقدار :attribute باید بین 0 تا 100 باشد.');
+                                        }
+                                    }])
+                                ->maxLength(255)->default(null),
                                 Forms\Components\DatePicker::make('discount_end')->label('تاریخ پایان تخفیف'),
                             ])->columns(),
 

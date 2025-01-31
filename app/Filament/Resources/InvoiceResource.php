@@ -7,6 +7,7 @@ use App\Filament\Resources\InvoiceResource\Pages;
 use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\User;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
@@ -34,9 +35,14 @@ class InvoiceResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('user_id')->label('انتخاب کاربر')
                             ->relationship('user', 'name')->live()->afterStateUpdated(function (Set $set, $state) {
+                                if($state){
                                 $user = User::find($state);
                                 $set('name', $user->name);
                                 $set('phone', '911');
+                                }else{
+                                    $set('name', null);
+                                $set('phone', null);
+                                }
                             })->searchable()->preload(),
                         Forms\Components\TextInput::make('name')->label('نام')
                             ->required(),
@@ -64,27 +70,46 @@ class InvoiceResource extends Resource
 
 
                 Repeater::make('products')->relationship('items')
+                ->label('محصولات')
                
                     ->schema([
                         Select::make('product_id')->label('محصول')
                             ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set, $state) {
-                                $product = Product::find($state);
-                                $set('price', number_format($product->price));
+                                if($state){
+                                    $product = Product::find($state);
+                                    if($product->discount){
+                                        $set('price',number_format(makeDiscount($product->price,$product->discount)));
+                                        $set('discount',$product->discount);
+                                    }else{
+                                        $set('price', number_format($product->price));
+                                    }
+                                }else{
+                                    $set('price',null);
+                                        $set('discount',null);
+                                }
                             })->searchable()->preload()
                             ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                             ->required(),
 
-                        TextInput::make('price')
+                        TextInput::make('price')->label('قیمت')
+                        ->readOnly()
                             ->required()->mask(RawJs::make('$money($input)'))->stripCharacters(','),
 
-                        TextInput::make('count')
+                        TextInput::make('count')->label('تعداد')
                             ->default(1)
+                            ->numeric()
                             ->required(),
 
-                        TextInput::make('discount')
+                        TextInput::make('discount')->label('درصد تخفیف')
                             ->default(0)
+                            ->rules([
+                                fn (): Closure => function (string $attribute, $value, Closure $fail) {
+                                    if ($value < 0 || $value > 100) {
+                                        $fail('مقدار :attribute باید بین 0 تا 100 باشد.');
+                                    }
+                                }])
                             ->required(),
-                        Hidden::make('total'),
+                       
 
 
 
