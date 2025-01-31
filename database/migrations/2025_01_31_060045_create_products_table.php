@@ -17,10 +17,10 @@ return new class extends Migration
             $table->text('images');
             $table->string('description');
             $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('price');
+            $table->bigInteger('price');
             $table->string('discount')->nullable();
             $table->date('discount_end')->nullable();
-            $table->string('inventory');
+            $table->bigInteger('inventory');
             $table->string('slug');
             $table->softDeletes();
             $table->timestamps();

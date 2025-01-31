@@ -25,40 +25,24 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('image')->label('تصویر')->columnSpanFull(),
                 Forms\Components\TextInput::make('title')->live(true)->afterStateUpdated(function (Forms\Set $set,$state){
                     $set('slug',Str::slug($state));
                 })->label('عنوان دسته بندی')->required()->maxLength(255),
                 Forms\Components\TextInput::make('slug')->required()->label('اسلاگ')->maxLength(255)->default(null),
-                Forms\Components\FileUpload::make('image')->label('تصویر')->columnSpanFull(),
                 Forms\Components\Select::make('parent_id')->columnSpanFull()->label('دسته بندی والد')->searchable()->preload()->options(Category::query()->pluck('title','id'))->default(null),
             ]);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
+        return $table->defaultSort('sort')->reorderable('sort')
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('parent_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sort')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('')->rowIndex(),
+                Tables\Columns\ImageColumn::make('image')->width(70)->height(70)->alignCenter(),
+                Tables\Columns\TextColumn::make('title')->label('عنوان')->alignCenter()->searchable(),
+                Tables\Columns\TextColumn::make('slug')->label('اسلاگ')->searchable(),
+                Tables\Columns\TextColumn::make('parent.title')->label('دسته بندی والد')->sortable(),
             ])
             ->filters([
                 //

@@ -27,7 +27,8 @@ class Product extends Model
         'updated_at',
     ];
 
-    public function category(){
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
        return $this->belongsTo(Category::class , 'category_id');
     }
 }
