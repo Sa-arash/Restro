@@ -16,6 +16,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -32,10 +33,10 @@ class InvoiceResource extends Resource
                 Section::make('اطلاعات سفارش')
                     ->schema([
                         Forms\Components\Select::make('user_id')->label('انتخاب کاربر')
-                            ->relationship('user', 'name')->live()->afterStateUpdated(function (Set $set  , $state) {
-                              $user =User::find($state);
-                                $set('name',$user->name);
-                                $set('phone','911');
+                            ->relationship('user', 'name')->live()->afterStateUpdated(function (Set $set, $state) {
+                                $user = User::find($state);
+                                $set('name', $user->name);
+                                $set('phone', '911');
                             })->searchable()->preload(),
                         Forms\Components\TextInput::make('name')->label('نام')
                             ->required(),
@@ -44,45 +45,52 @@ class InvoiceResource extends Resource
                             ->required(),
 
                         Forms\Components\Select::make('table_id')
-                        ->label('میز')
+                            ->label('میز')
                             ->relationship('table', 'title')->searchable()->preload()
                             ->required(),
 
                         Forms\Components\DatePicker::make('order_date')
-                        ->default(now())
-                        ->label('تاریخ سفارش')
+                            ->default(now())
+                            ->label('تاریخ سفارش')
                             ->required(),
                         Forms\Components\DatePicker::make('payment_date')
-                        ->default(now())
-                        ->label('تاریخ خرید'),
+                            ->default(now())
+                            ->label('تاریخ خرید'),
                         Forms\Components\ToggleButtons::make('status')
-                        ->default('order')
-                    ->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)
-                    ->required(),
+                            ->default('order')
+                            ->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)
+                            ->required(),
                     ])->columns(4),
 
 
-                            Repeater::make('products')->relationship('items')
-                            ->schema([
-                                Select::make('product_id')->label('محصول')
-                                ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set  , $state) {
-                                    $product =Product::find($state);
-                                      $set('price',$user->name);
-                                  })->searchable()->preload()
-                                ->required(),
-                                TextInput::make('price')
-                                ->required(),
-                                TextInput::make('count')
-                                ->default(1)
-                                ->required(),
-                                TextInput::make('discount')
-                                ->required(),
-                                Hidden::make('total'),
+                Repeater::make('products')->relationship('items')
+               
+                    ->schema([
+                        Select::make('product_id')->label('محصول')
+                            ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set, $state) {
+                                $product = Product::find($state);
+                                $set('price', number_format($product->price));
+                            })->searchable()->preload()
+                            ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                            ->required(),
+
+                        TextInput::make('price')
+                            ->required()->mask(RawJs::make('$money($input)'))->stripCharacters(','),
+
+                        TextInput::make('count')
+                            ->default(1)
+                            ->required(),
+
+                        TextInput::make('discount')
+                            ->default(0)
+                            ->required(),
+                        Hidden::make('total'),
 
 
 
 
-                            ])->columnSpanFull(),
+                    ])->columns(4)->columnSpanFull(),
+
                 Forms\Components\TextInput::make('total_discount')
                     ->required()
                     ->numeric(),
