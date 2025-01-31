@@ -2,18 +2,22 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\InvoiceStatus;
 use App\Filament\Resources\InvoiceResource\Pages;
-use App\Filament\Resources\InvoiceResource\RelationManagers;
 use App\Models\Invoice;
+use App\Models\Product;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class InvoiceResource extends Resource
 {
@@ -25,27 +29,60 @@ class InvoiceResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('userInfo')->label('اطلاعات کاربر')
-                ->schema([
-                    Forms\Components\TextInput::make('name')
+                Section::make('اطلاعات سفارش')
+                    ->schema([
+                        Forms\Components\Select::make('user_id')->label('انتخاب کاربر')
+                            ->relationship('user', 'name')->live()->afterStateUpdated(function (Set $set  , $state) {
+                              $user =User::find($state);
+                                $set('name',$user->name);
+                                $set('phone','911');
+                            })->searchable()->preload(),
+                        Forms\Components\TextInput::make('name')->label('نام')
+                            ->required(),
+                        Forms\Components\TextInput::make('phone')->label('شماره تلفن')
+                            ->tel()
+                            ->required(),
+
+                        Forms\Components\Select::make('table_id')
+                        ->label('میز')
+                            ->relationship('table', 'title')->searchable()->preload()
+                            ->required(),
+
+                        Forms\Components\DatePicker::make('order_date')
+                        ->default(now())
+                        ->label('تاریخ سفارش')
+                            ->required(),
+                        Forms\Components\DatePicker::make('payment_date')
+                        ->default(now())
+                        ->label('تاریخ خرید'),
+                        Forms\Components\ToggleButtons::make('status')
+                        ->default('order')
+                    ->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)
                     ->required(),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->required(),
-                Forms\Components\Select::make('user_id')
-                ->relationship('user','name')->live()->afterStateUpdated(function(Set $set){
-                    $set('name');
-                })->columns(3),
-            ]),
-               
-                Forms\Components\TextInput::make('table_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DatePicker::make('order_date')
-                    ->required(),
-                Forms\Components\DatePicker::make('payment_date'),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
+                    ])->columns(4),
+
+
+                            Repeater::make('products')->relationship('items')
+                            ->schema([
+                                Select::make('product_id')->label('محصول')
+                                ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set  , $state) {
+                                    $product =Product::find($state);
+                                      $set('price',$user->name);
+                                  })->searchable()->preload()
+                                ->required(),
+                                TextInput::make('price')
+                                ->required(),
+                                TextInput::make('count')
+                                ->default(1)
+                                ->required(),
+                                TextInput::make('discount')
+                                ->required(),
+                                Hidden::make('total'),
+
+
+
+
+                            ])->columnSpanFull(),
                 Forms\Components\TextInput::make('total_discount')
                     ->required()
                     ->numeric(),
@@ -59,13 +96,13 @@ class InvoiceResource extends Resource
     {
         return $table
             ->columns([
-                
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user_id')
-                ->numeric()
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('table_id')
                     ->numeric()

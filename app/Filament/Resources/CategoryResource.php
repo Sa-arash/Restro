@@ -26,7 +26,9 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('image')->label('تصویر')->columnSpanFull(),
-                Forms\Components\TextInput::make('title')->live(true)->afterStateUpdated(function (Forms\Set $set,$state){
+                Forms\Components\TextInput::make('title')
+                ->unique('categories','title',ignoreRecord :true)
+                ->live(true)->afterStateUpdated(function (Forms\Set $set,$state){
                     $set('slug',Str::slug($state));
                 })->label('عنوان دسته بندی')->required()->maxLength(255),
                 Forms\Components\TextInput::make('slug')->required()->label('اسلاگ')->maxLength(255)->default(null),

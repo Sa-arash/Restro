@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('table_id')->constrained('tables')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('order_date');  
             $table->date('payment_date')->nullable(); 
-            $table->enum('status', ['payed', 'order', 'pending', 'canceled']);  
+            $table->enum('status', ['payed', 'order', 'pending', 'cancele']);  
             $table->bigInteger('total_discount'); 
             $table->bigInteger('total_amount');  
             $table->softDeletes();  
