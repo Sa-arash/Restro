@@ -59,6 +59,15 @@ class TableResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('change')->fillForm(function ($record){
+                    return[
+                        'status'=>$record->status
+                    ];
+                })->label('تغییر وضعیت میز')->form([
+                    Forms\Components\ToggleButtons::make('status')->options(FreeUse::class)->grouped()->label('وضعیت')->required()
+                ])->action(function ($data,$record){
+                    $record->update($data);
+                })->requiresConfirmation(),
                 Tables\Actions\EditAction::make()->label(''),
                 Tables\Actions\ViewAction::make()->label(''),
                 Tables\Actions\DeleteAction::make()->label(''),
