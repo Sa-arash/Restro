@@ -39,7 +39,7 @@ class InvoiceResource extends Resource
             ->schema([
                 Section::make('اطلاعات سفارش')
                     ->schema([
-                        Forms\Components\Select::make('user_id')->label('انتخاب کاربر')
+                        Forms\Components\Select::make('user_id')->prefixIcon('heroicon-o-user-group')->prefixIconColor('icon')->label('انتخاب کاربر')
                             ->relationship('user', 'name')->live()->afterStateUpdated(function (Set $set, $state) {
                                 if ($state) {
                                     $user = User::find($state);
@@ -63,7 +63,7 @@ class InvoiceResource extends Resource
                     ->label('محصولات')
 
                     ->schema([
-                        Select::make('product_id')->label('محصول')
+                        Select::make('product_id')->label('محصول')->prefixIcon('fast-food')->prefixIconColor('icon')
                             ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set, $state) {
                                 if ($state) {
                                     $product = Product::find($state);
@@ -81,7 +81,7 @@ class InvoiceResource extends Resource
                             ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                             ->required(),
 
-                        TextInput::make('price')->label('قیمت')
+                        TextInput::make('price')->prefix('تومان')->label('قیمت')
 
                             ->live(true)->afterStateUpdated(function (Get $get, Set $set, $state) {
                                 if ($get('product_id')) {
@@ -92,21 +92,14 @@ class InvoiceResource extends Resource
                             })
                             ->required()->mask(RawJs::make('$money($input)'))->stripCharacters(','),
 
-                        TextInput::make('count')->label('تعداد')
-                            ->default(1)
-                            ->numeric()
-                            ->required(),
-
-                        TextInput::make('discount')->label('درصد تخفیف')
-                            ->default(0)
-                            ->rules([
+                        TextInput::make('count')->prefixIcon('count')->prefixIconColor('icon')->label('تعداد')->default(1)->numeric()->required(),
+                        TextInput::make('discount')->prefixIconColor('icon')->prefixIcon('heroicon-c-receipt-percent')->label('درصد تخفیف')->default(0)->rules([
                                 fn(): Closure => function (string $attribute, $value, Closure $fail) {
                                     if ($value < 0 || $value > 100) {
                                         $fail('مقدار :attribute باید بین 0 تا 100 باشد.');
                                     }
                                 }
-                            ])
-                            ->required(),
+                            ])->required(),
 
 
 

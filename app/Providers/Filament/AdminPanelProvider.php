@@ -39,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Teal,
                 'a' => Color::Amber,
-                'icon' => Color::Amber,
+                'icon' => Color::Sky,
                 'phone' => Color::Lime,
                 'show' => Color::Sky,
             ])
