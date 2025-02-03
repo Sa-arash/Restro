@@ -7,7 +7,7 @@ use Filament\Pages\Page;
 
 class TableStatus extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'chair';
     protected static ?string $title="میز های درحال استفاده";
 
     protected static string $view = 'filament.pages.table-status';

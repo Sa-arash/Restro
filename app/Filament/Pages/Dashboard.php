@@ -27,7 +27,7 @@ class Dashboard extends \Filament\Pages\Dashboard
                     '1m' => 'ماه گذشته',
                     '0y' => 'امسال',
                     '1y' => 'سال گذشته',
-                ])
+                ])->searchable()->preload()
             ])->columns(1);
     }
 }
