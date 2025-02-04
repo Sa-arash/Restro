@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Invoice;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\ChartWidget;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Hekmatinasser\Verta\Verta;
@@ -10,7 +11,7 @@ use Hekmatinasser\Verta\Verta;
 class OrderChart extends ChartWidget
 {
     use InteractsWithPageFilters;
-
+    use HasWidgetShield;
     protected int | string | array $columnSpan = 'full';
 
     protected static ?string $heading = 'نمودار سفارشات';

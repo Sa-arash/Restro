@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Enums\FreeUse;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -10,6 +11,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class TableStatus extends BaseWidget
 {
+    use HasWidgetShield;
     protected int | string | array $columnSpan='full';
     protected static ?int $sort=3;
 

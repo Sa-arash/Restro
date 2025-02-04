@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Invoice;
 use App\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
@@ -14,6 +15,7 @@ use Hekmatinasser\Verta\Verta;
 
 class StatsOverview extends BaseWidget
 {
+    use HasWidgetShield;
     use InteractsWithPageFilters;
     protected static ?int $sort = 1;
 
