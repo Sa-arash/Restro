@@ -3,10 +3,12 @@
 namespace App\Filament\Pages;
 
 use App\Models\Table;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Pages\Page;
 
 class TableStatus extends Page
 {
+    use HasPageShield;
     protected static ?string $navigationIcon = 'chair';
     protected static ?string $title="میز های درحال استفاده";
 

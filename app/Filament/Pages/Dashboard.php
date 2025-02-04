@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Filament\Widgets\OrderChart;
 use App\Filament\Widgets\OrdersSales;
 use App\Filament\Widgets\reportOrder;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -13,7 +14,7 @@ use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
 class Dashboard extends \Filament\Pages\Dashboard
 {
     use HasFiltersForm;
-
+    use HasPageShield;
     public function filtersForm(Form $form)
     {
         return $form
