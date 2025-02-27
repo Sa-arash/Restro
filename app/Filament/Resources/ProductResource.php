@@ -9,7 +9,9 @@ use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\IconSize;
 use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -83,6 +85,14 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('special_on')->requiresConfirmation()->action(function ($record){
+                    $record->update(['special_offer'=>1]);
+                    Notification::make('success')->success()->title('محصول به پیشنهاد ویژه اضافه شد')->color('success')->send();
+                })->icon('heroicon-o-star')->iconSize(IconSize::Large)->tooltip('اضافه به پیشنهاد ویژه')->label(' اضافه به پیشنهاد ویژه')->hidden(fn($record)=>$record->special_offer),
+                Tables\Actions\Action::make('special_off')->requiresConfirmation()->action(function ($record){
+                    $record->update(['special_offer'=>0]);
+                    Notification::make('success')->success()->title('محصول از پیشنهاد ویژه حذف شد')->color('success')->send();
+                })->icon('star-slash')->iconSize(IconSize::Large)->tooltip('حذف از پیشنهاد ویژه')->label(' حذف  از پیشنهاد ویژه')->visible(fn($record)=>$record->special_offer)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

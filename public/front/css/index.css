@@ -1,0 +1,140 @@
+@font-face {
+  font-family: "Noora";
+  src: url("../../fonts/noora/Noora-Medium.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background: url("public/front/image/Menu Nav.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Noora", Arial, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(4px);
+  z-index: -1;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: auto;
+  margin-top: 150px;
+}
+
+#app {
+  color: white;
+  font-size: 20px;
+}
+
+.logo-top {
+  width: 125px;
+  height: 125px;
+}
+
+@media screen and (max-width: 450px) {
+  #app {
+    font-size: 18px;
+  }
+
+  .logo-top {
+    width: 90px;
+    height: 90px;
+  }
+
+  .box-link-container {
+    width: 250px !important;
+  }
+
+  h2 {
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #app {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  .logo-top {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+main {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.box-link-container {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5e4c3;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.link-box {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.853);
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.box-link-container:hover {
+  transform: scale(1.1);
+  transition: 0.8s;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.show-restaurants {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.show-restaurants:hover {
+  background-color: #0056b3;
+}
+
+.restaurants-container {
+  display: none;
+  margin-top: 20px;
+}

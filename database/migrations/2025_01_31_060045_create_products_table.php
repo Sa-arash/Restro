@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('discount_end')->nullable();
             $table->bigInteger('inventory');
             $table->bigInteger('min_inventory');
+            $table->boolean('special_offer')->default(0);
             $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
