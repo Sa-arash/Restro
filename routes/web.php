@@ -6,4 +6,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/main',[\App\Http\Controllers\FrontController::class,'main']);
+Route::get('/home',[\App\Http\Controllers\FrontController::class,'main'])->name('home');
+Route::get('/product/{id}',[\App\Http\Controllers\FrontController::class,'productPage'])->name('product.page');

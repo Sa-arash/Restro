@@ -58,14 +58,18 @@
             <div class="bottom-best">
                 @foreach($products as $product )
                     <div class="food-card">
-                        <a href="#">
+                        <a href="{{route('product.page',['id'=>$product->id])}}">
                             <img
                                 src="{{asset('images/'.$product->images)}}" alt="Food Image" class="food-image"
                             />
                             <div class="food-info">
                                 <div class="food-rating">
-                                    ⭐{{$product->comments->sum('star')/ $product->comments->count()}}
+                                    0⭐
+                                    @if($product->comments->where('is_show',1)->sum('star'))
+                                    {{$product->comments->where('is_show',1)->sum('star')/ $product->comments->where('is_show',1)->count()}}
+                                    @endif
                                 </div>
+
                                 <h3 class="food-title">{{$product->title}}</h3>
                                 <p class="food-description">{{\Illuminate\Support\Str::limit($product->description,20)}}</p>
                                 <div class="food-price">

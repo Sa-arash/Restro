@@ -56,7 +56,7 @@ class ProductResource extends Resource
                                         }
                                     ])
                                     ->maxLength(255)->default(null),
-                                Forms\Components\DatePicker::make('discount_end')->label('تاریخ پایان تخفیف'),
+                                Forms\Components\DatePicker::make('discount_end')->jalali()->label('تاریخ پایان تخفیف'),
                             ])->columns(),
 
                     ])->columnSpanFull()
