@@ -27,47 +27,47 @@ const swiper = new Swiper(".swiper", {
 
 
 jalaliDatepicker.startWatch();
+let stars = document.querySelectorAll(".star");
 
-const addReviewBtn = document.querySelector("#add-review");
+stars.forEach(function (star) {
+    star.addEventListener("click", function () {
+        selectedStars = parseInt(star.getAttribute("data-star"), 10);
 
-function showAlert() {
-    let selectedStars = 0;
-
-    Swal.fire({
-        title: "ثبت نظر",
-        html: `
-<!--            <div id="stars" class="mt-3">-->
-<!--                <i class="bi bi-star star" data-star="1"></i>-->
-<!--                <i class="bi bi-star star" data-star="2"></i>-->
-<!--                <i class="bi bi-star star" data-star="3"></i>-->
-<!--                <i class="bi bi-star star" data-star="4"></i>-->
-<!--                <i class="bi bi-star star" data-star="5"></i>-->
-<!--            </div>-->
-            <textarea id="comment" wire:model="text" class="swal2-textarea" placeholder="نظر شما"></textarea>
-            <button wire:click="save()">dwa</button>
-        `,
-        showCancelButton: true,
-        cancelButtonText: "انصراف ",
-        confirmButtonText: "ثبت نظر",
-    });
-
-    let stars = document.querySelectorAll(".star");
-
-    stars.forEach(function (star) {
-        star.addEventListener("click", function () {
-            selectedStars = parseInt(star.getAttribute("data-star"), 10);
-
-            stars.forEach(function (s) {
-                s.classList.remove("checked");
-            });
-
-            for (var i = 1; i <= selectedStars; i++) {
-                document
-                    .querySelector('.star[data-star="' + i + '"]')
-                    .classList.add("checked");
-            }
+        stars.forEach(function (s) {
+            s.classList.remove("checked");
         });
-    });
-}
 
-addReviewBtn.addEventListener("click", showAlert);
+        for (var i = 1; i <= selectedStars; i++) {
+            document
+                .querySelector('.star[data-star="' + i + '"]')
+                .classList.add("checked");
+        }
+    });
+});
+// const addReviewBtn = document.querySelector("#add-review");
+//
+// function showAlert() {
+//     let selectedStars = 0;
+//
+//     Swal.fire({
+//         title: "ثبت نظر",
+//         html: `
+// <!--            <div id="stars" class="mt-3">-->
+// <!--                <i class="bi bi-star star" data-star="1"></i>-->
+// <!--                <i class="bi bi-star star" data-star="2"></i>-->
+// <!--                <i class="bi bi-star star" data-star="3"></i>-->
+// <!--                <i class="bi bi-star star" data-star="4"></i>-->
+// <!--                <i class="bi bi-star star" data-star="5"></i>-->
+// <!--            </div>-->
+//             <textarea id="comment" wire:model="text" class="swal2-textarea" placeholder="نظر شما"></textarea>
+//             <button wire:click="save()">dwa</button>
+//         `,
+//         showCancelButton: true,
+//         cancelButtonText: "انصراف ",
+//         confirmButtonText: "ثبت نظر",
+//     });
+//
+//
+// }
+//
+// addReviewBtn.addEventListener("click", showAlert);
