@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\CustomLogin;
 use App\Filament\Pages\Dashboard;
 use Filament\FontProviders\LocalFontProvider;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
@@ -35,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             )
             ->id('admin')->maxContentWidth(MaxWidth::Full)
             ->path('admin')
-            ->login()
+            ->login(CustomLogin::class)
             ->colors([
                 'primary' => Color::Teal,
                 'a' => Color::Amber,
