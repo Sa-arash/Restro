@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('comment');
             $table->string('star');
-            $table->boolean('is_show')->default(true);
+            $table->boolean('is_show')->default(0);
             $table->timestamp('read_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
