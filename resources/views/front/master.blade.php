@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{asset('front/css/swiper.css')}}"/>
     <link rel="stylesheet" href="{{asset('front/css/jalali.css')}}"/>
     <link rel="stylesheet" href="{{asset('front/css/styles.css')}}"/>
+    @livewireStyles
+
     <title>@yield('title')</title>
 </head>
 <body dir="rtl">
@@ -258,7 +260,7 @@
 <script src="{{asset('front/js/swiper.js')}}"></script>
 <script src="{{asset('front/js/jalali.js')}}"></script>
 <script src="{{asset('front/js/bootstrap.js')}}"></script>
-
+@livewireScripts
 <script src="{{asset('front/js/app.js')}}"></script>
 </body>
 </html>
