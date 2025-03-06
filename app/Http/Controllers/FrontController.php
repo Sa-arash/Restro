@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -15,9 +14,10 @@ class FrontController extends Controller
         return view('front/pages/home',compact('categories','products'));
     }
     public function productPage($product){
-
         $product=Product::query()->with('comments')->findOrFail($product);
-
         return view('front/pages/product-page',compact('product'));
+    }
+    public function cart(){
+        return view('front/pages/cart');
     }
 }

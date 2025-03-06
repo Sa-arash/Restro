@@ -28,12 +28,9 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->label('نام ونام خانوادگی')->required()->maxLength(255),
-                Forms\Components\TextInput::make('phone_number')->tel()->required()->maxLength(11)->minLength(11),
-                Forms\Components\Select::make('roles')->relationship('roles', 'name')->multiple()->preload()->searchable(),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone_number')->label('شماره تلفن')->tel()->required()->maxLength(11)->minLength(11),
+                Forms\Components\Select::make('roles')->label('سطح دسترسی')->relationship('roles', 'name')->multiple()->preload()->searchable(),
+                Forms\Components\TextInput::make('password')->label('رمز عبور')->password()->required()->maxLength(255),
             ]);
     }
 
@@ -41,7 +38,9 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('')->rowIndex(),
+                Tables\Columns\TextColumn::make('name')->label('نام و نام خانوادگی')->searchable(),
+                Tables\Columns\TextColumn::make('phone_number')->label('شماره تلفن')->searchable(),
 
 
             ])
