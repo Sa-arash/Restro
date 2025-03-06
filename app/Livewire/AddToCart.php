@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Table;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
@@ -36,7 +37,9 @@ class AddToCart extends Component
     {
         if ($this->count > 1) {
             $this->updateProductCount($this->count - 1);
+
         }
+
     }
 
     private function updateProductCount($count)
@@ -45,6 +48,8 @@ class AddToCart extends Component
         $this->products[$this->product->id] = $count;
         $this->saveProductsToCookie();
         $this->count = $count;
+        $this->dispatch('totalUpdate');
+
     }
 
     private function saveProductsToCookie()

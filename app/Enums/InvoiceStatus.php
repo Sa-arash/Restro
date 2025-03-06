@@ -11,7 +11,7 @@ enum InvoiceStatus:string implements HasColor,HasLabel
 case Payed = 'payed';
 case Order = 'order';
 case Pending = 'pending';
-case Cancele = 'cancele';
+case Canceled = 'cancele';
 
     public function getLabel(): ?string
     {
@@ -19,7 +19,7 @@ case Cancele = 'cancele';
             self::Payed => 'پرداخت شده',
             self::Order => 'سفارش داده شده',
             self::Pending => 'در حال انتظار',
-            self::Cancele => 'لغو شده',
+            self::Canceled => 'لغو شده',
         };
     }
     public function getColor(): string|array|null
@@ -28,7 +28,7 @@ case Cancele = 'cancele';
             self::Payed => 'success',
             self::Order => 'warning',
             self::Pending => 'info',
-            self::Cancele => 'danger',
+            self::Canceled => 'danger',
 
         };
     }

@@ -17,7 +17,7 @@
                     <p class="border-bottom"><strong>تعداد باقی مانده:</strong> {{$product->inventory}} عدد</p>
                     <p>
                         @if($product->discount_end >= now()->startOfDay()->toDateString())
-                            <del class="text-danger">{{$product->price}} تومان</del>
+                            <del class="text-danger">{{number_format($product->price)}} تومان</del>
                             <span class="badge text-bg-success">{{$product->discount}}% تخفیف</span>
                     <p>{{number_format($product->price-(($product->price*$product->discount)/100))}} تومان</p></p>
                     @else

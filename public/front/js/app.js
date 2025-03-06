@@ -44,6 +44,17 @@ stars.forEach(function (star) {
         }
     });
 });
+let radios = document.querySelectorAll("[name=paymentMethod]")
+if (radios) {
+    radios.forEach((radio) => {
+        radio.addEventListener('click', function () {
+            let inp = document.querySelector("[name=type]")
+            inp.value = radio.value
+        })
+
+    })
+}
+
 // const addReviewBtn = document.querySelector("#add-review");
 //
 // function showAlert() {
