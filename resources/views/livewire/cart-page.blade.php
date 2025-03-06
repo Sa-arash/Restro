@@ -90,20 +90,21 @@
                             </div>
                             <div class="wrapper-box-cart">
                                 @foreach($products as $product)
-
                                 <div class="cart-item">
                                     <div class="basket-box">
                                         <div class="basket-box-right">
                                             <span>{{$product->title}}</span>
-                                            <span
-                                                class="item-price"
-                                                data-price="140000"
-                                                style="margin-top: 10px; color: #898989"
-                                            >{{$product->title}} تومان</span
-                                            >
+                                            <p>
+                                                @if($product->discount_end >= now()->startOfDay()->toDateString())
+                                                    <del class="text-danger">{{$product->price}} تومان</del>
+                                                    <span class="badge text-bg-success">{{$product->discount}}% تخفیف</span>
+                                            <p>{{number_format($product->price-(($product->price*$product->discount)/100))}} تومان</p></p>
+                                            @else
+                                                <span class="item-price" style="margin-top: 10px; color: #898989">{{number_format($product->price)}} تومان</span>
+                                            @endif
                                         </div>
                                         <div class="">
-                                            <livewire:add-to-cart  :product="$product" />
+                                            <livewire:add-to-cart  :$product  :key="$product->id" />
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +118,7 @@
                             </div>
                             <div class="cart-pay">
                                 <span>مبلغ قابل پرداخت</span>
-                                <span id="total-price">542,000 تومان</span>
+                                <span id="total-price">{{number_format($total)}} تومان</span>
                             </div>
                             <button class="btn btn-success btn-block mt-3">
                                 تایید و پرداخت

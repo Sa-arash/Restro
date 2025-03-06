@@ -14,7 +14,7 @@
                 <div class="col-md-6 right">
                     <h3 class="title-product-buy">{{$product->title}}</h3>
                     <p class="details-product-buy">{{$product->description}}</p>
-                    <p class="border-bottom"><strong>تعداد باقی مانده:</strong> 10 عدد</p>
+                    <p class="border-bottom"><strong>تعداد باقی مانده:</strong> {{$product->inventory}} عدد</p>
                     <p>
                         @if($product->discount_end >= now()->startOfDay()->toDateString())
                             <del class="text-danger">{{$product->price}} تومان</del>
@@ -23,7 +23,7 @@
                     @else
                         <p>{{number_format($product->price)}} تومان</p></p>
                     @endif
-                    <livewire:add-to-cart :product="$product" />
+                    <livewire:add-to-cart :product="$product"/>
                 </div>
             </div>
         </div>

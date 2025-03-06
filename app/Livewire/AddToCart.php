@@ -41,6 +41,7 @@ class AddToCart extends Component
 
     private function updateProductCount($count)
     {
+        $this->products = json_decode(request()->cookie('products'), true) ?? [];
         $this->products[$this->product->id] = $count;
         $this->saveProductsToCookie();
         $this->count = $count;
