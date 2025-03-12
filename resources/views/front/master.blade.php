@@ -12,7 +12,7 @@
         href="{{asset('front/image/SAMAT.png')}}"
         type="image/x-icon"
     />
-    <link rel="stylesheet" href="{{asset('front/css/iconBootstrap.css')}}"/>
+    <link rel="stylesheet" href="{{asset('front/image/user.png')}}"/>
     <link rel="stylesheet" href="{{asset('front/css/bootstrap.css')}}"/>
     <link rel="stylesheet" href="{{asset('front/css/swiper.css')}}"/>
     <link rel="stylesheet" href="{{asset('front/css/jalali.css')}}"/>

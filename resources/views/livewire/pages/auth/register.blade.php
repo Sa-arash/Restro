@@ -83,11 +83,6 @@ new #[Layout('layouts.guest')] class extends Component
 };
 ?>
 
-
-
-
-
-
 <div class="login-container">
     <form class="login-form" wire:submit="register">
         <h2 style="text-align: center">ثبت نام کاربر</h2>
