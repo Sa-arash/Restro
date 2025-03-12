@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <div>
-
+   
     <main class="container mt-5 mb-5">
         <div class="broudcam mt-5">
             <a href="./../indexsamat/index.html">خانه ></a>
@@ -15,30 +15,14 @@ new class extends Component {
         </div>
         <div class="container mt-5">
             <ul class="nav nav-tabs">
+                @foreach ($categories as $category)
                 <li class="nav-item">
                     <a class="nav-link menu-item active" data-target="main-course">
                         <img src="./img/diet_706195.png" alt="menu-logo" class="menu-logo" />
                         غذای اصلی
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-item" data-target="appetizers">
-                        <img src="{{ asset('front/image/hot-soup.png') }}" alt="menu-logo" class="menu-logo" />
-                        پیش غذا
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-item" data-target="desserts">
-                        <img src="./img/pudding.png" alt="menu-logo" class="menu-logo" />
-                        دسر
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-item" data-target="drinks">
-                        <img src="./img/soft-drink.png" alt="menu-logo" class="menu-logo" />
-                        نوشیدنی
-                    </a>
-                </li>
+                @endforeach
             </ul>
             <div id="main-course" class="product product-container mt-3">
                 <!-- محصولات غذای اصلی -->
