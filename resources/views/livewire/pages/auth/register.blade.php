@@ -58,7 +58,7 @@ new #[Layout('layouts.guest')] class extends Component
         Session::flash('phone_number');
         Session::flash('tryCount');
         Session::flash('code');
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
 
     public function sendCode()
@@ -82,11 +82,6 @@ new #[Layout('layouts.guest')] class extends Component
     }
 };
 ?>
-
-
-
-
-
 
 <div class="login-container">
     <form class="login-form" wire:submit="register">
