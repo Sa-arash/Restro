@@ -101,14 +101,19 @@
                                                         @endif value="{{$table->id}}">{{$table->title }}</option>
                                             @endforeach
                                         </select>
+                                    <strong class="text-danger">@error('tb')  {{$message}} @enderror</strong>
+
                                 @else
                                     <p class="cart-Discount-title">میز</p>
-                                    <select name="table" id="" class="form-select  w-75  m-auto">
-                                        @foreach($tables as $table)
+                                    <select wire:model="tb" id="" class="form-select  w-75  m-auto">
+                                        <option   value="">انتخاب میز </option>
+                                    @foreach($tables as $table)
                                             <option @if($table->status->name==="Use")  disabled
                                                     @endif value="{{$table->id}}">{{$table->title}}</option>
                                         @endforeach
                                     </select>
+                                    <strong class="text-danger">@error('tb')  {{$message}} @enderror</strong>
+
                                 @endguest
                             </div>
                         </div>
@@ -136,10 +141,10 @@
                                         type="radio"
                                         name="paymentMethod"
                                         id="payAtRestaurant"
-                                        value="0"
+                                        value="0" wire:model="method"
                                     />
                                     <label class="form-check-label" for="payAtRestaurant">
-                                        <img
+                                        <img wire:click="paymentMethod(0)"
                                             src="{{asset('front/image/wallet-2.png')}}"
                                             style="margin-left: 10px; width: 25px; height: 25px"
                                             alt=""
@@ -149,7 +154,7 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment"
-                                           value="1" checked/>
+                                           wire:model="method" value="1" checked/>
                                     <label class="form-check-label" for="onlinePayment">
                                         <img src="{{asset('front/image/card-pos.png')}}"
                                              style="margin-left: 10px; width: 25px; height: 25px" alt=""/>
@@ -202,7 +207,7 @@
                                     @endforeach
                                 </div>
                                 <div     class="w-100 " >
-                                    <input type="hidden" name="type" value="1">
+
                                     <strong class="text-danger">@error('table')  {{$message}} @enderror</strong>
                                     <strong class="text-danger">@error('products')  {{$message}} @enderror</strong>
                                     <div class="cart-Discount">
