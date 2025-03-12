@@ -25,6 +25,7 @@ class FrontController extends Controller
         return view('front/pages/product-page', compact('product'));
     }
 
+
     public function cart()
     {
         return view('front/pages/cart');

@@ -37,7 +37,7 @@
             >
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="./../indexsamat/index.html"
+                        <a class="nav-link active" href="{{route('home')}}"
                         >صفحه اصلی</a
                         >
                     </li>
@@ -62,16 +62,16 @@
                     <a
                         type="button"
                         class="btn btn-secondary margin-right-btn"
-                        href="./../forms/login/login.html"
+                        href="{{route('login')}}"
                     >ورود</a
                     >
                     <a
                         type="button"
                         class="btn btn-dark margin-right-btn"
-                        href="./../forms/register/register.html"
+                        href="{{route('register')}}"
                     >عضویت</a
                     >
-                    <a href="./../pay-basket/index.html" style="display: flex">
+                    <a href="{{route('cart.page')}}" style="display: flex">
                         <img
                             src="{{asset('front/image/Icon1.png')}}"
                             class="margin-right-btn icon-style"
