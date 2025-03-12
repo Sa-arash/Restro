@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\Copon;
 use App\Models\Product;
 use App\Models\Table;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -12,18 +14,21 @@ use Livewire\Component;
 class CartPage extends Component
 {
 
-    public $products = [], $cartProduct;
+    public $products = [], $cartProduct, $tables,$step=1;
     public $total;
     #[Validate('required', message: 'لطفا کد تخفیف خود را وارد کنید')]
     public $couponCode;
 
     public $errorCuponCode,$successCode;
 
+    public $name,$phoneNumber,$tb;
+
     public function mount()
     {
         $this->cartProduct = json_decode(request()->cookie('products'), true) ?? [];
         $this->products = Product::query()->whereIn('id', array_keys($this->cartProduct))->get();
         $this->totalUpdate();
+        $this->tables = Table::query()->get();
     }
 
     #[On('totalUpdate')]
@@ -74,16 +79,41 @@ class CartPage extends Component
             } else {
                 $this->errorCuponCode = "همچین خود تخفیفی برای شما وجود ندارد";
             }
-        }else{
+        } else {
             $this->errorCuponCode = "برای استفاده از کد تخفیف ابتدا وارد حساب کاربری خود شوید";
         }
     }
 
+    public function deleteAll()
+    {
+        Cookie::queue(Cookie::forget('products'));
+        $this->total = 0;
+
+        $this->products = [];
+    }
+    public function stepTwe(){
+            $this->step=2;
+    }
+    public function stepThree(){
+        $this->validate([
+            'name'=>'required|min:3',
+            'phoneNumber'=>'required|min:11|max:11',
+        ],[
+            'phoneNumber.required'=>'شماره تلفن الزامی است'
+        ],[
+            'phoneNumber'=>'شماره تلفن'
+        ]);
+        $this->step=2;
+    }
+
+    public function save(){
+dd($this->name,$this->phone,$this->tb);
+    }
 
     public function render()
     {
-        $tables=Table::query()->get();
 
-        return view('livewire.cart-page',compact('tables'));
+
+        return view('livewire.cart-page');
     }
 }

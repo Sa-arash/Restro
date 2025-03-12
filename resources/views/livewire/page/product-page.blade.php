@@ -14,9 +14,12 @@
                 <div class="col-md-6 right">
                     <h3 class="title-product-buy">{{$product->title}}</h3>
                     <p class="details-product-buy">{{$product->description}}</p>
+                    @if($product->inventory <10)
                     <p class="border-bottom"><strong>تعداد باقی مانده:</strong> {{$product->inventory}} عدد</p>
-                    <p>
-                        @if($product->discount_end >= now()->startOfDay()->toDateString())
+                    @else
+                        <p class="border-bottom"></p>
+                    @endif
+                    <p>@if($product->discount_end >= now()->startOfDay()->toDateString())
                             <del class="text-danger">{{number_format($product->price)}} تومان</del>
                             <span class="badge text-bg-success">{{$product->discount}}% تخفیف</span>
                     <p>{{number_format($product->price-(($product->price*$product->discount)/100))}} تومان</p></p>
@@ -38,7 +41,7 @@
                             <strong>{{$comment->user->name}}</strong>
                         <p class="text-muted d-inline p-0">{{verta($comment->created_at)->format('d F Y')}}</p>
                         <span class="badge badge-warning">
-                                    @for($i=1;$i<=$comment->star;$i++)
+                            @for($i=1;$i<=$comment->star;$i++)
                                 <i class="bi bi-star-fill"></i>
                             @endfor
               </span>
