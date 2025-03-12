@@ -80,7 +80,7 @@ new #[Layout('layouts.guest')] class extends Component {
         <div class="input-group">
 
             <label for="phone_number">نام کاربری</label>
-            <x-text-input wire:model="form.phone_number" id="phone_number" class="block mt-1 w-full" type="number"
+            <x-text-input wire:model="form.phone_number" id="phone_number" class="block mt-1 w-full" type="text"
                 name="phone_number" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.phone_number')" class="mt-2" />
         </div>
