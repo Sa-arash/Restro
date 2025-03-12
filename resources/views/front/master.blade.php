@@ -29,13 +29,13 @@
                             <a class="nav-link active" href="{{ route('home') }}">صفحه اصلی</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./../menu/menu.html" aria-current="page">منو</a>
+                            <a class="nav-link" href="{{route('menu')}}" aria-current="page">منو</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./../ContactUs/contactus.html">تماس با ما</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./../aboutus/index.html">درباره ما</a>
+                            <a class="nav-link" href="{{route('about')}}">درباره ما</a>
                         </li>
                     </ul>
                     <form class="d-flex response-form-icon" role="search">
@@ -77,17 +77,17 @@
         </nav>
         <nav class="responsive-mobile d-lg-none box-shadow">
             <div class="wrapper-responsive-mobile">
-                <a href="./../indexsamat/index.html" class="box-reponsive active-mobile-responsive-header">
+                <a href="{{route('home')}}" class="box-reponsive active-mobile-responsive-header">
                     <i class="bi bi-house-door"></i>
                     <span style="font-size: 10px">خانه</span>
                 </a>
-                <a href="./../menu/menu.html" class="box-reponsive"><i class="bi bi-list"></i><span
+                <a href="{{route('menu')}}" class="box-reponsive"><i class="bi bi-list"></i><span
                         style="font-size: 10px">منو</span>
                 </a>
-                <a href="./../Shopping/shopping.html" class="box-reponsive"><i class="bi bi-cart"></i><span
+                <a href="{{route('cart.page')}}" class="box-reponsive"><i class="bi bi-cart"></i><span
                         style="font-size: 10px">سبد خرید</span>
                 </a>
-                <a href="./../aboutus/index.html" class="box-reponsive">
+                <a href="{{route('about')}}" class="box-reponsive">
                     <i class="bi bi-info-circle"></i><span style="font-size: 10px">درباره ما</span>
                 </a>
                 @auth
@@ -148,13 +148,13 @@
                             <a href="./../Questions/index.html" class="text-reset">سوالات متداول</a>
                         </p>
                         <p>
-                            <a href="./../aboutus/index.html" class="text-reset">درباره ما</a>
+                            <a href="{{route('about')}}" class="text-reset">درباره ما</a>
                         </p>
                         <p>
                             <a href="./../ContactUs/contactus.html" class="text-reset">ارتباط با ما</a>
                         </p>
                         <p>
-                            <a href="./../menu/menu.html" class="text-reset">منو</a>
+                            <a href="{{route('menu')}}" class="text-reset">منو</a>
                         </p>
                         @guest
 

@@ -17,7 +17,7 @@ class FrontController extends Controller
         $categories = Category::query()->get();
         $products = Product::query()->with('comments')->where('special_offer', 1)->limit(8)->get();
         return view('front/pages/home', compact('categories', 'products'));
-    } 
+    }
     public function menu()
     {
         $categories = Category::query()->get();
@@ -32,6 +32,10 @@ class FrontController extends Controller
     }
 
 
+    public function about()
+    {
+
+    }
     public function cart()
     {
         return view('front/pages/cart');

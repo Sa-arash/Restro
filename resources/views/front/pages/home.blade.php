@@ -64,9 +64,11 @@
                             />
                             <div class="food-info">
                                 <div class="food-rating">
-                                    0⭐
+
                                     @if($product->comments->where('is_show',1)->sum('star'))
-                                    {{$product->comments->where('is_show',1)->sum('star')/ $product->comments->where('is_show',1)->count()}}
+                                     {{$product->comments->where('is_show',1)->sum('star')/ $product->comments->where('is_show',1)->count()}} ⭐
+                                    @else
+                                        0⭐
                                     @endif
                                 </div>
 

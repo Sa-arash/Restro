@@ -57,10 +57,10 @@
                                                            $avg= $product->comments->where('is_show',1)->sum('star') /$commentCount;
                                                         @endphp
                                                         {{$avg}}
-                                                            <i class="bi bi-star-fill"></i>
+                                                        ⭐
                                                         <span class="text-dark">({{$product->comments->where('is_show',1)->count()}})</span>
                                                     @else
-                                                        0<i class="bi bi-star-fill"></i>
+                                                        0⭐
                                                         <span class="text-dark">({{$product->comments->where('is_show',1)->count()}})</span>
                                                     @endif
                                                 </div>
@@ -74,7 +74,7 @@
                                 <p>شما در حال حاضر هیچ سفارشی ثبت نکرده‌اید!</p>
                             @endif
                         <div class="btn-box">
-                            <a href="./../menu/menu.html" class="btn btn-primary btn-menu"
+                            <a href="{{route('menu')}}" class="btn btn-primary btn-menu"
                             >منوی رستوران</a
                             >
                             @if(isset($products[0]))
