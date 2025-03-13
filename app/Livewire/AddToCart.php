@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Table;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
@@ -52,8 +51,16 @@ class AddToCart extends Component
 
     }
 
+    public function delete()
+    {
+        unset($this->products[$this->product->id]);
+        $this->status = true;
+        $this->saveProductsToCookie();
+    }
+
     private function saveProductsToCookie()
     {
+
         Cookie::queue('products', json_encode($this->products), 60);
     }
 
