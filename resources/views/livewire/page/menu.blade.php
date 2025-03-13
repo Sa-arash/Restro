@@ -119,37 +119,86 @@
             @foreach ($categories as $category)
                     <div id="{{ $category->slug }}" class="product product-container mt-3" style="display: none">
                     @forelse ($category->products as $product)
-
-                    <div class="product-card " >
-                        <div class="product-image">
-                            <img src="{{ asset('images/' . ($product->images ?? 'default.jpg')) }}" alt="کوفته برنجی" />
-                        </div>
-                        <div class="product-info">
-                            <h3>{{$product->title}}</h3>
-                            <p>{{$product->desctiprion}}</p>
-                            <div class="d-flex align-items-center">
-                                @if ($product->discount)
-                                <span class="discount">{{$product->discount}}%</span>
-                                <span class="original-price ml-2">{{ $product->price + ($product->price * ($product->discount / 100)) }} </span>
-                                @endif
-                            </div>
-                            <div class="price">{{number_format($product->price)}}</div>
-                            <div class="wrapper-add-product-and-stars">
-                                <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
-                                <div class="rating mt-2">
-                                    <div class="stars">
-                                        <img src="./img/icons8-star-16.png" alt="" />
-                                        <img src="./img/icons8-star-16.png" alt="" />
-                                        <img src="./img/icons8-star-16.png" alt="" />
-                                        <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                            alt="" />
-                                        <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                            alt="" />
+                            <div data-bs-toggle="modal" data-bs-target="#productModal{{$product->id}}-1" class="product-card " >
+                                <div  class="product-image">
+                                    <img src="{{ asset('images/' . ($product->images ?? 'default.jpg')) }}" alt="کوفته برنجی" />
+                                </div>
+                                <div class="product-info">
+                                    <h3>{{$product->title}}</h3>
+                                    <p>{{$product->desctiprion}}</p>
+                                    <div class="d-flex align-items-center">
+                                        @if ($product->discount)
+                                            <span class="discount">{{$product->discount}}%</span>
+                                            <span class="original-price ml-2">{{ $product->price + ($product->price * ($product->discount / 100)) }} </span>
+                                        @else
+                                            <span class="discount"></span>
+                                            <span class="original-price ml-2"></span>
+                                        @endif
+                                    </div>
+                                    <div class="price">{{number_format($product->price)}}</div>
+                                    <div class="wrapper-add-product-and-stars">
+                                        <div class="rating mt-2">
+                                            <div class="stars">
+                                                <img src="./img/icons8-star-16.png" alt="" />
+                                                <img src="./img/icons8-star-16.png" alt="" />
+                                                <img src="./img/icons8-star-16.png" alt="" />
+                                                <img src="./img/icons8-star-24.png" width="16px" height="16px"
+                                                     alt="" />
+                                                <img src="./img/icons8-star-24.png" width="16px" height="16px"
+                                                     alt="" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="modal  fade" id="productModal{{$product->id}}-1" tabindex="-1" aria-labelledby="productModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h5 class="modal-title" id="productModalLabel">جزئیات محصول</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="top-item-box">
+                                                <img src="{{ asset('images/' . ($product->images ?? 'default.jpg')) }}" alt="img" class="img-product"  />
+                                            </div>
+                                            <div class="bottom-item-box">
+                                                <div class="title-box-item">
+                                                    <h3  class="text-center w-100">{{$product->title}}</h3>
+                                                </div>
+                                                <p > {{$product->description}}</p>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="discount" id="modalProductDiscount"></span>
+                                                    <span class="original-price ml-2" id="modalProductOriginalPrice"></span>
+                                                </div>
+                                                <div class="price" id="modalProductPrice"></div>
+                                                <div class="wrapper-add-product-and-stars ">
+                                                    <livewire:add-to-cart :product="$product" />
+                                                    <div class="rating mt-2">
+                                                        <div class="stars">
+                                                            @php
+                                                                $commentCount=$product->comments->where('is_show',1)->count()
+                                                            @endphp
+                                                            @if($commentCount)
+                                                                @php
+                                                                    $avg= $product->comments->where('is_show',1)->sum('star') /$commentCount;
+                                                                @endphp
+                                                                {{$avg}}
+                                                                ⭐
+                                                                <span class="text-dark">({{$product->comments->where('is_show',1)->count()}})</span>
+                                                            @else
+                                                                0⭐
+                                                                <span class="text-dark">({{$product->comments->where('is_show',1)->count()}})</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     @empty
                    محصولی در این دسته بندی نیست
                     @endforelse
