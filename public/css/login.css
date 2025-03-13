@@ -1,140 +1,154 @@
 @font-face {
-  font-family: "Noora";
-  src: url("./../Font\ Family/Noora-Medium.ttf") format("ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-body {
-  background: url("./img/resturant.jpg") no-repeat center center fixed;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: "Noora", Arial, sans-serif;
-}
-
-.btn-vorod {
-  font-family: "Noora", Arial, sans-serif;
-  background-color: #14463d;
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  filter: blur(10px);
-  z-index: -1;
-}
-
-.input-group i {
-  margin-left: 5px;
-  vertical-align: middle;
-}
-
-.title {
-  text-align: center;
-}
-
-.login-container {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.5s;
-  width: 20%;
-}
-
-.login-form {
-  text-align: right;
-}
-
-.login-form h2 {
-  margin-bottom: 20px;
-}
-
-.input-group {
-  margin-bottom: 15px;
-  margin-right: -3px;
-  width: 90%;
-  margin-left: auto;
-}
-
-.input-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input-group input[type="text"],
-.input-group input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: right;
-}
-
-.input-group.remember-me {
-  display: flex;
-  align-items: center;
-}
-
-.input-group.remember-me input {
-  margin-left: 10px;
-}
-
-.forgot-password {
-  display: block;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-@media screen and (max-width: 330px) {
-  h2 {
-    font-size: 20px;
+    font-family: "Noora";
+    src: url("./../Font\ Family/Noora-Medium.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
   }
-}
-
-@media screen and (max-width: 770px) {
+  
+  body {
+    background: url("./img/resturant.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: "Noora", Arial, sans-serif;
+  }
+  
+  .btn-vorod {
+    font-family: "Noora", Arial, sans-serif;
+    background-color: #14463d !important;
+  }
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -1;
+  }
+  
+  .input-group i {
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  
+  .title {
+    text-align: center;
+  }
+  
   .login-container {
-    width: 80%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s;
+    width: 20%;
   }
-}
-a {
-  text-decoration: none;
-  margin-top: 20px;
-  display: block;
-  color: black;
-  cursor: pointer;
-}
+  
+  .login-form {
+    text-align: right;
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    margin-right: -3px;
+    /* width: 90%; */
+    margin-left: auto;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input[type="text"],
+  .input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: right;
+  }
+  
+  .input-group.remember-me {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group.remember-me input {
+    /* margin-left: 10px; */
+  }
+  
+  .forgot-password {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
 
-input {
-  outline: none;
-  border: none;
-  background: #cccccc4d;
-}
+  .button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media screen and (max-width: 330px) {
+    h2 {
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 770px) {
+    .login-container {
+      width: 80%;
+    }
+  }
+  a {
+    text-decoration: none;
+    margin-top: 20px;
+    display: block;
+    color: black;
+    cursor: pointer;
+  }
+  
+  input {
+    outline: none;
+    border: none;
+    background: #cccccc4d;
+  }
+  
