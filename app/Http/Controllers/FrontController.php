@@ -12,16 +12,17 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+ 
     public function main()
     {
         $categories = Category::query()->get();
-        $products = Product::query()->with('comments')->where('special_offer', 1)->limit(8)->get();
+        $products = Product::query()->with('comments')->get();
         return view('front/pages/home', compact('categories', 'products'));
     }
     public function menu()
     {
         $categories = Category::query()->get();
-        $products = Product::query()->with('comments')->where('special_offer', 1)->limit(8)->get();
+        $products = Product::query()->with('comments')->get();
         return view('front/pages/menu', compact('categories', 'products'));
     }
 

@@ -13,7 +13,7 @@ document.querySelectorAll(".menu-item").forEach((item) => {
   });
 });
 
-document.getElementById("main-course").style.display = "flex";
+// document.getElementById("main-course").style.display = "flex";
 document.addEventListener("DOMContentLoaded", function () {
   const productCards = document.querySelectorAll(".product-card");
   const modal = new bootstrap.Modal(document.getElementById("productModal"));

@@ -1,13 +1,5 @@
-<?php
-
-use Livewire\Volt\Component;
-
-new class extends Component {
-    //
-}; ?>
-
 <div>
-   
+
     <main class="container mt-5 mb-5">
         <div class="broudcam mt-5">
             <a href="./../indexsamat/index.html">خانه ></a>
@@ -15,165 +7,118 @@ new class extends Component {
         </div>
         <div class="container mt-5">
             <ul class="nav nav-tabs">
-                @foreach ($categories as $category)
+
                 <li class="nav-item">
-                    <a class="nav-link menu-item active" data-target="main-course">
-                        <img src="./img/diet_706195.png" alt="menu-logo" class="menu-logo" />
-                        غذای اصلی
+                    <a class="nav-link menu-item active"
+                        data-target="all">
+                        <img src="{{ asset('images/default.jpg') }}" alt="menu-logo"
+                            class="menu-logo" />
+                      همه
                     </a>
                 </li>
+
+                @foreach ($categories as $category)
+                    <li class="nav-item">
+                        <a class="nav-link menu-item"
+                            data-target="{{ $category->slug }}">
+                            <img src="{{ asset('images/' . ($category->image ?? 'default.jpg')) }}" alt="menu-logo"
+                                class="menu-logo" />
+                            {{ $category->title }}
+                        </a>
+                    </li>
+
+                    
                 @endforeach
             </ul>
-            <div id="main-course" class="product product-container mt-3">
-                <!-- محصولات غذای اصلی -->
-                <div class="product-card d-flex">
-                    <div class="product-image">
-                        <img src="./img/julia-joppien-E4ZxCUrEX2g-unsplash.jpg" alt="کوفته برنجی" />
-                    </div>
-                    <div class="product-info">
-                        <h3>کوفته برنجی</h3>
-                        <p>برنج سبزی کوفته لپه آرد نخودچی گردو و زرشک و آلو پیاز</p>
-                        <div class="d-flex align-items-center">
-                            <span class="discount">٪۳۵</span>
-                            <span class="original-price ml-2">۱۸۰,۰۰۰</span>
+            <div id="all" class="product product-container mt-3">
+               
+                @foreach ($products as $product)
+                    <div class="product-card " >
+                        <div class="product-image">
+                            <img src="{{ asset('images/' . ($product->image ?? 'default.jpg')) }}" alt="کوفته برنجی" />
                         </div>
-                        <div class="price">۱۴۵,۰۰۰ تومان</div>
-                        <div class="wrapper-add-product-and-stars">
-                            <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
-                            <div class="rating mt-2">
-                                <div class="stars">
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px" alt="" />
+                        <div class="product-info">
+                            <h3>{{$product->title}}</h3>
+                            <p>{{$product->desctiprion}}</p>
+                            <div class="d-flex align-items-center">
+                                @if ($product->discount)
+                                <span class="discount">{{$product->discount}}%</span>
+                                <span class="original-price ml-2">{{ $product->price + ($product->price * ($product->discount / 100)) }} </span>
+                                @else
+                                <span class="discount"></span>
+                                <span class="original-price ml-2"></span>
+                                @endif
+                            </div>
+                            <div class="price">{{$product->price}}</div>
+                            <div class="wrapper-add-product-and-stars">
+                                <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
+                                <div class="rating mt-2">
+                                    <div class="stars">
+                                        <img src="./img/icons8-star-16.png" alt="" />
+                                        <img src="./img/icons8-star-16.png" alt="" />
+                                        <img src="./img/icons8-star-16.png" alt="" />
+                                        <img src="./img/icons8-star-24.png" width="16px" height="16px"
+                                            alt="" />
+                                        <img src="./img/icons8-star-24.png" width="16px" height="16px"
+                                            alt="" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-card d-flex">
-                    <div class="product-image">
-                        <img src="./img/julia-joppien-E4ZxCUrEX2g-unsplash.jpg" alt="کوفته برنجی" />
-                    </div>
-                    <div class="product-info">
-                        <h3>کوفته برنجی</h3>
-                        <p>برنج سبزی کوفته لپه آرد نخودچی گردو و زرشک و آلو پیاز</p>
-                        <div class="d-flex align-items-center">
-                            <span class="discount">٪۳۵</span>
-                            <span class="original-price ml-2">۱۸۰,۰۰۰</span>
-                        </div>
-                        <div class="price">۱۴۵,۰۰۰ تومان</div>
-                        <div class="wrapper-add-product-and-stars">
-                            <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
-                            <div class="rating mt-2">
-                                <div class="stars">
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+
+
             </div>
-            <div id="appetizers" class="product product-container mt-3">
-                <!-- محصولات پیش غذا -->
-                <div class="product-card d-flex">
-                    <div class="product-image">
-                        <img src="./img/julia-joppien-E4ZxCUrEX2g-unsplash.jpg" alt="کوفته برنجی" />
-                    </div>
-                    <div class="product-info">
-                        <h3>کوفته برنجی</h3>
-                        <p>برنج سبزی کوفته لپه آرد نخودچی گردو و زرشک و آلو پیاز</p>
-                        <div class="d-flex align-items-center">
-                            <span class="discount">٪۳۵</span>
-                            <span class="original-price ml-2">۱۸۰,۰۰۰</span>
+
+            @foreach ($categories as $category)
+                <div id="{{ $category->slug }}" class="product product-container mt-3" style="display: none">
+                    @forelse ($category->products as $product)
+                  
+                    <div class="product-card " >
+                        <div class="product-image">
+                            <img src="{{ asset('images/' . ($product->image ?? 'default.jpg')) }}" alt="کوفته برنجی" />
                         </div>
-                        <div class="price">۱۴۵,۰۰۰ تومان</div>
-                        <div class="wrapper-add-product-and-stars">
-                            <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
-                            <div class="rating mt-2">
-                                <div class="stars">
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                        alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                        alt="" />
+                        <div class="product-info">
+                            <h3>{{$product->title}}</h3>
+                            <p>{{$product->desctiprion}}</p>
+                            <div class="d-flex align-items-center">
+                                @if ($product->discount)
+                                <span class="discount">{{$product->discount}}%</span>
+                                <span class="original-price ml-2">{{ $product->price + ($product->price * ($product->discount / 100)) }} </span>
+                                @endif
+                            </div>
+                            <div class="price">{{$product->price}}</div>
+                            <div class="wrapper-add-product-and-stars">
+                                <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
+                                <div class="rating mt-2">
+                                    <div class="stars">
+                                        <img src="./img/icons8-star-16.png" alt="" />
+                                        <img src="./img/icons8-star-16.png" alt="" />
+                                        <img src="./img/icons8-star-16.png" alt="" />
+                                        <img src="./img/icons8-star-24.png" width="16px" height="16px"
+                                            alt="" />
+                                        <img src="./img/icons8-star-24.png" width="16px" height="16px"
+                                            alt="" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                      
+                   @empty
+                   محصولی در این دسته بندی نیست 
+                    @endforelse
+
+
+
                 </div>
-            </div>
-            <div id="desserts" class="product product-container mt-3">
-                <!-- محصولات دسر -->
-                <div class="product-card d-flex">
-                    <div class="product-image">
-                        <img src="./img/julia-joppien-E4ZxCUrEX2g-unsplash.jpg" alt="کوفته برنجی" />
-                    </div>
-                    <div class="product-info">
-                        <h3>کوفته برنجی</h3>
-                        <p>برنج سبزی کوفته لپه آرد نخودچی گردو و زرشک و آلو پیاز</p>
-                        <div class="d-flex align-items-center">
-                            <span class="discount">٪۳۵</span>
-                            <span class="original-price ml-2">۱۸۰,۰۰۰</span>
-                        </div>
-                        <div class="price">۱۴۵,۰۰۰ تومان</div>
-                        <div class="wrapper-add-product-and-stars">
-                            <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
-                            <div class="rating mt-2">
-                                <div class="stars">
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                        alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                        alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="drinks" class="product product-container mt-3">
-                <!-- محصولات نوشیدنی -->
-                <div class="product-card d-flex">
-                    <div class="product-image">
-                        <img src="./img/julia-joppien-E4ZxCUrEX2g-unsplash.jpg" alt="کوفته برنجی" />
-                    </div>
-                    <div class="product-info">
-                        <h3>کوفته برنجی</h3>
-                        <p>برنج سبزی کوفته لپه آرد نخودچی گردو و زرشک و آلو پیاز</p>
-                        <div class="d-flex align-items-center">
-                            <span class="discount">٪۳۵</span>
-                            <span class="original-price ml-2">۱۸۰,۰۰۰</span>
-                        </div>
-                        <div class="price">۱۴۵,۰۰۰ تومان</div>
-                        <div class="wrapper-add-product-and-stars">
-                            <button class="add-to-cart mt-3">افزودن به سبد خرید</button>
-                            <div class="rating mt-2">
-                                <div class="stars">
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-16.png" alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                        alt="" />
-                                    <img src="./img/icons8-star-24.png" width="16px" height="16px"
-                                        alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-    </main>
+    </main> 
+
+
 
     <!-- Modal HTML -->
     <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel"
