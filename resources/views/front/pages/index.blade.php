@@ -25,7 +25,7 @@
         >
       </div>
       <div class="box-link-container">
-        <a href="./indexsamat/index.html" class="link-box"
+        <a href="href="{{ route('home') }}" class="link-box"
           >رستوران گردشگری سماط</a
         >
       </div>

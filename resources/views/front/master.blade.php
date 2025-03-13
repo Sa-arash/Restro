@@ -21,7 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary d-none d-lg-block">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./../indexsamat/index.html"><img
+                <a class="navbar-brand" href="{{ route('home') }}"><img
                         src="{{ asset('front/image/SAMAT.png') }}" alt="samatlogo" class="logosamat-orginal" /></a>
                 <div class="collapse navbar-collapse response-box-header" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

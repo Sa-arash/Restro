@@ -2,7 +2,7 @@
 
     <main class="container mt-5 mb-5">
         <div class="broudcam mt-5">
-            <a href="./../indexsamat/index.html">خانه ></a>
+            <a href="href="{{ route('home') }}">خانه ></a>
             <a href="#">منو</a>
         </div>
         <div class="container mt-5">
