@@ -32,7 +32,7 @@
                             <a class="nav-link" href="{{route('menu')}}" aria-current="page">منو</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./../ContactUs/contactus.html">تماس با ما</a>
+                            <a class="nav-link" href="{{route('contact')}}">تماس با ما</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('about')}}">درباره ما</a>
@@ -151,7 +151,7 @@
                             <a href="{{route('about')}}" class="text-reset">درباره ما</a>
                         </p>
                         <p>
-                            <a href="./../ContactUs/contactus.html" class="text-reset">ارتباط با ما</a>
+                            <a href="{{route('contact')}}" class="text-reset">ارتباط با ما</a>
                         </p>
                         <p>
                             <a href="{{route('menu')}}" class="text-reset">منو</a>

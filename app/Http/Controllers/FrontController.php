@@ -32,10 +32,14 @@ class FrontController extends Controller
         return view('front/pages/product-page', compact('product'));
     }
 
+public function contact()
+    {
+        return view('front/pages/contact');
+    }
 
     public function about()
     {
-
+        return view('front/pages/about');
     }
     public function cart()
     {

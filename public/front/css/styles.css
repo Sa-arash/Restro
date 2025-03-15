@@ -1712,7 +1712,7 @@ li {
 }
 
 .box-left-main {
-  background: url("../../front/image/us.png") no-repeat center center;
+  background: url("../image/Contact\ us.png") no-repeat center center;
   font-family: "Noora", Arial, sans-serif;
   background-size: cover;
   flex-direction: column;
@@ -1725,7 +1725,7 @@ li {
 }
 
 .background-box {
-  background: url("./../ContactUs/img/Our\ Gallary\ 3.png") no-repeat center
+  background:url("../image/Our\ Gallary\ 3.png") no-repeat center
     center;
   background-size: cover;
   font-family: "Noora", Arial, sans-serif;
@@ -2202,7 +2202,7 @@ a {
 }
 
 input::placeholder {
-  color: white;
+  color: rgb(148, 148, 148);
 }
 
 .copyright {
