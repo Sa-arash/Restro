@@ -145,7 +145,7 @@
                     <div class="col-6 col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 col-footer-responsive-text">
                         <h6 class="text-uppercase fw-bold mb-4">خدمات مشتریان</h6>
                         <p>
-                            <a href="./../Questions/index.html" class="text-reset">سوالات متداول</a>
+                            <a href="{{ route('questions') }}" class="text-reset">سوالات متداول</a>
                         </p>
                         <p>
                             <a href="{{route('about')}}" class="text-reset">درباره ما</a>

@@ -1,6 +1,6 @@
 @extends('front.master')
 @section('title')
-    درباره ما
+    ارتباط با ما
 @endsection
 @section('body')
 
