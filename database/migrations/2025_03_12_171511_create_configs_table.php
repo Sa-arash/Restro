@@ -23,7 +23,6 @@ return new class extends Migration
                 $table->string('header_image')->nullable();
                 $table->string('header_title')->nullable();
                 $table->string('header_description')->nullable();
-                $table->string('header_description')->nullable();
 
                 // Head Chef
                 $table->string('head_chef_photo')->nullable();
