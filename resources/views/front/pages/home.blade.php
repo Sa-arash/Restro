@@ -141,9 +141,14 @@
         <h2>درخواست رزرو</h2>
         <div class="reserv-box">
             <h2 style="color: white">خوش آمدید</h2>
-            <form action="" class="form-box-reserv">
+            <form action="{{route('turn')}}" method="post"  style="flex-direction: column" class="justify-content-center text-center d-flex       align-items-center " >
+                @method('POST')
+                @csrf
+                <div class="form-box-reserv">
+
+
                 <div class="date">
-                    <input
+                    <input name="date" required
                         class="datapicker"
                         data-jdp
                         placeholder="لطفا تاریخ خود را انتخاب کنید"
@@ -151,62 +156,74 @@
                     />
                 </div>
                 <div class="hourse">
-                    <select
-                        class="datapicker"
-                        class="form-select"
+                    <select name="time"
+                            required
+                        class="datapicker  "
                         aria-label="Default select example"
                         style="color: white"
                     >
-                        <option selected style="color: #ccc">
+                        <option selected value="" style="color: #ccc">
                             ساعت خود را انتخاب کنید
                         </option>
-                        <option value="1">13</option>
-                        <option value="2">14</option>
-                        <option value="3">17</option>
-                        <option value="3">18</option>
-                        <option value="3">19</option>
-                        <option value="3">20</option>
-                        <option value="3">21</option>
-                        <option value="3">22</option>
-                        <option value="3">23</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
                     </select>
                 </div>
                 <div class="numbertable">
-                    <select
-                        class="datapicker"
-                        style="color: white"
-                        class="form-select"
+                    <select required
+                        name="count"
+                            style="color: white"
+                        class="datapicker select"
                         aria-label="Default select example"
+
                     >
-                        <option selected style="color: #ccc">
+                        <option selected   value=""  style="color: white"  >
                             تعداد افراد را وارد کنید
                         </option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="3">4</option>
-                        <option value="3">5</option>
-                        <option value="3">6</option>
-                        <option value="3">7</option>
-                        <option value="3">بیشتر ...</option>
+                        <option  value="1">1</option>
+                        <option  value="2">2</option>
+                        <option  value="3">3</option>
+                        <option  value="4">4</option>
+                        <option  value="5">5</option>
+                        <option  value="6">6</option>
+                        <option  value="7">7</option>
+                        <option  value="most">بیشتر ...</option>
                     </select>
                 </div>
                 <div class="phone">
-                    <input
-                        type="text"
-                        class="datapicker"
+                    <input name="phone"
+                        type="number" required style="appearance: none !important; -moz-appearance: none !important;color: white"
+
+                           class="datapicker"
+                           pattern="[1-9]+"
                         placeholder="لطفا شماره تلفن خود را وارد کنید"
                     />
                 </div>
                 <div class="nameandfamily">
-                    <input
-                        type="text"
-                        class="datapicker"
+                    <input name="fullName"
+                           style="color: white"
+                        type="text" required
+                           class="datapicker"
                         placeholder="لطفا نام و نام خانوادگی خود را وارد کنید"
                     />
                 </div>
+                </div>
+                @if(\Illuminate\Support\Facades\Cookie::get('setTurn'))
+                        <button type="button"  class="send-reserv-btn-success"> درخواست شما ارسال شده </button>
+                @else
+                        <button type="submit" class="send-reserv-btn ">ارسال درخواست</button>
+                @endif
             </form>
-            <button class="send-reserv-btn">ارسال درخواست</button>
+
         </div>
     </section>
 </main>

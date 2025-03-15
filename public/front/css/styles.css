@@ -2178,11 +2178,8 @@ a {
   height: 400px;
   margin: 0;
   font-family: "Noora", Arial, sans-serif;
-
   padding: 0;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
@@ -2293,7 +2290,6 @@ input::placeholder {
   .datapicker {
     margin-bottom: 20px;
   }
-
   .hourse {
     margin-bottom: 20px;
   }
@@ -2370,6 +2366,20 @@ input::placeholder {
   border: 1px solid #ccc;
   border-radius: 25px;
   margin-top: 30px;
+}
+.send-reserv-btn-success {
+    display: block;
+    background: #14463d;
+    width: 300px;
+    height: 40px;
+    color: white;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-top: 30px;
+}
+select option {
+    color: black;
 }
 
 /* end index styles */

@@ -21,3 +21,6 @@ Route::get('/product/{id}',[\App\Http\Controllers\FrontController::class,'produc
 Route::get('/cart',[\App\Http\Controllers\FrontController::class,'cart'])->name('cart.page');
 Route::post('/payment',[\App\Http\Controllers\FrontController::class,'payment'])->name('payment.url');
 Route::get('/darga',[\App\Http\Controllers\FrontController::class,'darga'])->name('darga.url');
+
+
+Route::post('turn',[\App\Http\Controllers\FrontController::class,'turn'])->name('turn');
