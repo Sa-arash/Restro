@@ -56,7 +56,7 @@ class CartPage extends Component
         if ($user){
             $coupon = Copon::query()->where('user_id',$user )->where('token', $this->couponCode)->first();
             if ($coupon) {
-                if ($coupon->start_date >= now()->format('Y-m-d')) {
+                if ($coupon->start_date <= now()->format('Y-m-d')) {
                     if ($coupon->end_date > now()->format('Y-m-d')) {
                         if ($coupon->min_price < $this->total) {
                             $this->totalUpdate();
@@ -136,7 +136,7 @@ class CartPage extends Component
         if (auth()->user()) {
             $coupon = Copon::query()->where('user_id', auth()->id())->where('token', $this->couponCode)->first();
             if ($coupon) {
-                if ($coupon->start_date >= now()->format('Y-m-d')) {
+                if ($coupon->start_date <= now()->format('Y-m-d')) {
                     if ($coupon->end_date > now()->format('Y-m-d')) {
                         if ($coupon->min_price < $total) {
                             $discountPrice = ($total * $coupon->discount) / 100;
@@ -200,7 +200,7 @@ class CartPage extends Component
                     'total' => $total
                 ]);
             } else {
-                $total += $product->price * $count;
+                $total = $product->price * $count;
                 ProductInvoice::query()->create([
                     'invoice_id'=>$invoice->id,
                     'product_id' => $product->id,

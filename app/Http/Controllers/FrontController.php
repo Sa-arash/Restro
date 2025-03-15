@@ -8,11 +8,15 @@ use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\ProductInvoice;
 use App\Models\Table;
+use App\Models\Turn;
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class FrontController extends Controller
 {
- 
+
     public function main()
     {
         $categories = Category::query()->get();
@@ -157,5 +161,30 @@ public function contact()
     }
     public function darga(){
         return 'درگاه پرداخت';
+    }
+    public function turn(Request $request){
+        $request->validate([
+            'count'=>'required',
+            'fullName'=>'required|min:3|max:200',
+            'phone'=>'required|min:11|max:11',
+            'time'=>'required',
+            'date'=>'required',
+        ]);
+        $time = Carbon::createFromTimestamp((int) $request->get('time')*60*60)->format('H:i:s');
+
+
+        $date= Verta::parse($request->get('date'))->toCarbon();
+        if ($date){
+            Turn::query()->create([
+                'name'=>$request->get('fullName'),
+                'phone_number'=>$request->get('phone'),
+                'date'=>$date,
+                'time'=>$time,
+                'count'=>$request->get('count')
+            ]);
+            Cookie::queue('setTurn', 1, 60*24);
+
+        }
+        return back();
     }
 }
