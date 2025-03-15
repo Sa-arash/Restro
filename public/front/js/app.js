@@ -46,6 +46,29 @@ stars.forEach(function (star) {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".nav-tabs .nav-link");
+    const panes = document.querySelectorAll(".tab-pane");
+  
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", function (event) {
+        event.preventDefault();
+  
+        tabs.forEach((t) => t.classList.remove("activelist"));
+  
+        tab.classList.add("activelist");
+  
+        panes.forEach((pane) => pane.classList.remove("activelist", "show"));
+  
+        const target = document.querySelector(tab.getAttribute("href"));
+        target.classList.add("activelist", "show");
+      });
+    });
+  
+    tabs[0].click();
+  });
+  
+
 // const addReviewBtn = document.querySelector("#add-review");
 //
 // function showAlert() {

@@ -36,7 +36,7 @@ class FrontController extends Controller
         return view('front/pages/product-page', compact('product'));
     }
 
-public function contact()
+    public function contact()
     {
         return view('front/pages/contact');
     }
@@ -45,11 +45,15 @@ public function contact()
     {
         return view('front/pages/about');
     }
+    public function questions()
+    {
+        return view('front/pages/questions');
+    }
+
     public function cart()
     {
         return view('front/pages/cart');
     }
-
     public function payment(Request $request)
     {
 
@@ -88,12 +92,12 @@ public function contact()
         }
         if (auth()->user()) {
             $request->validate([
-                'table'=>'required|exists:tables,id',
+                'table' => 'required|exists:tables,id',
             ]);
 
-            if (empty($products[0])){
+            if (empty($products[0])) {
                 $request->validate([
-                    'products'=>'required',
+                    'products' => 'required',
                 ]);
             }
             $user = auth()->user();
@@ -110,9 +114,9 @@ public function contact()
             ]);
         } else {
             $request->validate([
-                'name'=>'required|min:1|max:250',
-                'phone'=>'required|min:1|max:250',
-                'table'=>'required|exists:tables,id'
+                'name' => 'required|min:1|max:250',
+                'phone' => 'required|min:1|max:250',
+                'table' => 'required|exists:tables,id'
             ]);
             $invoice = Invoice::query()->create([
                 'name' => $request->request->get('name'),
@@ -125,15 +129,15 @@ public function contact()
                 'total_amount' => $total,
             ]);
         }
-        $table=Table::query()->firstWhere('id',$request->request->get('table'));
-        $table->update(['status'=>'use']);
+        $table = Table::query()->firstWhere('id', $request->request->get('table'));
+        $table->update(['status' => 'use']);
         foreach ($products as $product) {
             $count = $cartProduct[$product->id];
             if ($product->discount_end >= now()->startOfDay()->toDateString()) {
                 $total = ($product->price - (($product->price * $product->discount) / 100)) * $count;
-                $priceDiscount=($product->price - (($product->price * $product->discount) / 100));
+                $priceDiscount = ($product->price - (($product->price * $product->discount) / 100));
                 ProductInvoice::query()->create([
-                    'invoice_id'=>$invoice->id,
+                    'invoice_id' => $invoice->id,
                     'product_id' => $product->id,
                     'price' => $priceDiscount,
                     'count' => $count,
@@ -143,7 +147,7 @@ public function contact()
             } else {
                 $total += $product->price * $count;
                 ProductInvoice::query()->create([
-                    'invoice_id'=>$invoice->id,
+                    'invoice_id' => $invoice->id,
                     'product_id' => $product->id,
                     'price' => $product->price,
                     'count' => $count,
@@ -151,39 +155,39 @@ public function contact()
                     'total' => $total
                 ]);
             }
-
         }
 
-        if ($request->request->get('type')==="1"){
+        if ($request->request->get('type') === "1") {
             return redirect(route('darga.url'));
         }
         dd(number_format($total) . " مبلغ قابل پرداخت   ");
     }
-    public function darga(){
+    public function darga()
+    {
         return 'درگاه پرداخت';
     }
-    public function turn(Request $request){
+    public function turn(Request $request)
+    {
         $request->validate([
-            'count'=>'required',
-            'fullName'=>'required|min:3|max:200',
-            'phone'=>'required|min:11|max:11',
-            'time'=>'required',
-            'date'=>'required',
+            'count' => 'required',
+            'fullName' => 'required|min:3|max:200',
+            'phone' => 'required|min:11|max:11',
+            'time' => 'required',
+            'date' => 'required',
         ]);
-        $time = Carbon::createFromTimestamp((int) $request->get('time')*60*60)->format('H:i:s');
+        $time = Carbon::createFromTimestamp((int) $request->get('time') * 60 * 60)->format('H:i:s');
 
 
-        $date= Verta::parse($request->get('date'))->toCarbon();
-        if ($date){
+        $date = Verta::parse($request->get('date'))->toCarbon();
+        if ($date) {
             Turn::query()->create([
-                'name'=>$request->get('fullName'),
-                'phone_number'=>$request->get('phone'),
-                'date'=>$date,
-                'time'=>$time,
-                'count'=>$request->get('count')
+                'name' => $request->get('fullName'),
+                'phone_number' => $request->get('phone'),
+                'date' => $date,
+                'time' => $time,
+                'count' => $request->get('count')
             ]);
-            Cookie::queue('setTurn', 1, 60*24);
-
+            Cookie::queue('setTurn', 1, 60 * 24);
         }
         return back();
     }
