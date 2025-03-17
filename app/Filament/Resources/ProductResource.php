@@ -85,14 +85,14 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('special_on')->requiresConfirmation()->action(function ($record){
+                Tables\Actions\Action::make('special_on')->color('warning')->requiresConfirmation()->action(function ($record){
                     $record->update(['special_offer'=>1]);
                     Notification::make('success')->success()->title('محصول به پیشنهاد ویژه اضافه شد')->color('success')->send();
-                })->icon('heroicon-o-star')->iconSize(IconSize::Large)->tooltip('اضافه به پیشنهاد ویژه')->label(' اضافه به پیشنهاد ویژه')->hidden(fn($record)=>$record->special_offer),
-                Tables\Actions\Action::make('special_off')->requiresConfirmation()->action(function ($record){
+                })->icon('heroicon-o-star')->iconSize(IconSize::Large)->tooltip('اضافه به پیشنهاد ویژه')->label(' اضافه به پیشنهاد ویژه')->hidden(fn($record)=>$record->special_offer)->modalIcon('heroicon-o-star'),
+                Tables\Actions\Action::make('special_off')->color('rose')->requiresConfirmation()->action(function ($record){
                     $record->update(['special_offer'=>0]);
                     Notification::make('success')->success()->title('محصول از پیشنهاد ویژه حذف شد')->color('success')->send();
-                })->icon('star-slash')->iconSize(IconSize::Large)->tooltip('حذف از پیشنهاد ویژه')->label(' حذف  از پیشنهاد ویژه')->visible(fn($record)=>$record->special_offer)
+                })->icon('star-slash')->modalIcon('star-slash')->iconSize(IconSize::Large)->tooltip('حذف از پیشنهاد ویژه')->label(' حذف  از پیشنهاد ویژه')->visible(fn($record)=>$record->special_offer)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

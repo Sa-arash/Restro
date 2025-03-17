@@ -22,7 +22,7 @@ new #[Layout('layouts.guest')] class extends Component {
         $this->redirect(route('home'));
     }
 }; ?>
-{{-- 
+{{--
 <div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -96,13 +96,13 @@ new #[Layout('layouts.guest')] class extends Component {
             <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
             <label for="remember">مرا به خاطر بسپار</label>
         </div>
-        <div class="input-group">
-            <a href="{{ route('password.request') }}" wire:navigate class="forgot-password">فراموشی رمز عبور</a>
-        </div>
+{{--        <div class="input-group">--}}
+{{--            <a href="{{ route('password.request') }}" wire:navigate class="forgot-password">فراموشی رمز عبور</a>--}}
+{{--        </div>--}}
         <x-primary-button  class="btn-vorod button text-center">
             <span class="text-center mx-auto">ورود</span>
         </x-primary-button>
-        <a href="{{ route('register') }}">ایجاد حساب کاربری</a>
+        <a href="{{ route('register') }}" >ایجاد حساب کاربری</a>
     </form>
 </div>
 
@@ -112,11 +112,11 @@ new #[Layout('layouts.guest')] class extends Component {
 
 
 
-{{-- 
+{{--
 
 {{-- <div>
     <!-- Session Status -->
-    
+
 
     <form >
         <!-- phone_number Address -->
@@ -169,7 +169,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
 
 </div> --}}
-{{-- 
+{{--
 
 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -191,7 +191,7 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
         <div class="input-group remember-me">
-          
+
             <input wire:model="form.remember" id="remember" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
             <label for="remember">مرا به خاطر بسپار</label>
         </div>

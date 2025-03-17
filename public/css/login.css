@@ -1,10 +1,10 @@
 @font-face {
     font-family: "Noora";
-    src: url("./../Font\ Family/Noora-Medium.ttf") format("ttf");
+    src: url('../fonts/peyda/woff2/PeydaWeb-Black.woff2') format("woff");
     font-weight: normal;
     font-style: normal;
   }
-  
+
   body {
     background: url("./img/resturant.jpg") no-repeat center center fixed;
     background-size: cover;
@@ -13,14 +13,14 @@
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: "Noora", Arial, sans-serif;
+    font-family: "PeydaWeb", Arial, sans-serif;
   }
-  
+
   .btn-vorod {
     font-family: "Noora", Arial, sans-serif;
     background-color: #14463d !important;
   }
-  
+
   body::before {
     content: "";
     position: absolute;
@@ -32,16 +32,16 @@
     filter: blur(10px);
     z-index: -1;
   }
-  
+
   .input-group i {
     margin-left: 5px;
     vertical-align: middle;
   }
-  
+
   .title {
     text-align: center;
   }
-  
+
   .login-container {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
@@ -50,27 +50,27 @@
     transition: transform 0.5s;
     width: 20%;
   }
-  
+
   .login-form {
     text-align: right;
   }
-  
+
   .login-form h2 {
     margin-bottom: 20px;
   }
-  
+
   .input-group {
     margin-bottom: 15px;
     margin-right: -3px;
     /* width: 90%; */
     margin-left: auto;
   }
-  
+
   .input-group label {
     display: block;
     margin-bottom: 5px;
   }
-  
+
   .input-group input[type="text"],
   .input-group input[type="password"] {
     width: 100%;
@@ -79,27 +79,27 @@
     border-radius: 5px;
     text-align: right;
   }
-  
+
   .input-group.remember-me {
     display: flex;
     align-items: center;
   }
-  
+
   .input-group.remember-me input {
     /* margin-left: 10px; */
   }
-  
+
   .forgot-password {
     display: block;
     margin-top: 10px;
     color: #007bff;
     text-decoration: none;
   }
-  
+
   .forgot-password:hover {
     text-decoration: underline;
   }
-  
+
   button {
     width: 100%;
     padding: 10px;
@@ -109,7 +109,7 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
 
   .button {
     width: 100%;
@@ -126,13 +126,13 @@
   button:hover {
     background-color: #0056b3;
   }
-  
+
   @media screen and (max-width: 330px) {
     h2 {
       font-size: 20px;
     }
   }
-  
+
   @media screen and (max-width: 770px) {
     .login-container {
       width: 80%;
@@ -145,10 +145,9 @@
     color: black;
     cursor: pointer;
   }
-  
+
   input {
     outline: none;
     border: none;
     background: #cccccc4d;
   }
-  
