@@ -49,19 +49,16 @@ class InvoiceResource extends Resource
                                     $set('name', null);
                                     $set('phone', null);
                                 }
-                            })->searchable()->preload(),
-                        Forms\Components\TextInput::make('name')->label('نام')->required(),
-                        Forms\Components\TextInput::make('phone')->minLength(11)->maxLength(11)->prefixIcon('heroicon-s-device-phone-mobile')->prefixIconColor('icon')->label('شماره تلفن')->tel()->required(),
-                        Forms\Components\Select::make('table_id')->prefixIcon('chair')->prefixIconColor('icon')->label('میز')->relationship('table', 'title')->searchable()->preload()->required()->disableOptionWhen(fn (string $value): bool => \App\Models\Table::query()->firstWhere('id',$value)?->status === 'use'),
-                        Forms\Components\DatePicker::make('order_date')->default(now())->label('تاریخ ثبت سفارش')->jalali()->required(),
-                        Forms\Components\DatePicker::make('payment_date')->jalali()->default(now())->label('تاریخ پرداخت'),
-                        Forms\Components\ToggleButtons::make('status')->grouped()->default('order')->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)->required(),
+                            })->searchable()->preload()->columnSpan(['default'=>4,'sm'=>1,'md'=>1,'xl'=>1,'2xl'=>1]),
+                        Forms\Components\TextInput::make('name')->label('نام')->required()->columnSpan(['default'=>4,'sm'=>1,'md'=>1,'xl'=>1,'2xl'=>1]),
+                        Forms\Components\TextInput::make('phone')->columnSpan(['default'=>4,'sm'=>1,'md'=>1,'xl'=>1,'2xl'=>1])->minLength(11)->maxLength(11)->prefixIcon('heroicon-s-device-phone-mobile')->prefixIconColor('icon')->label('شماره تلفن')->tel()->required(),
+                        Forms\Components\Select::make('table_id')->columnSpan(['default'=>4,'sm'=>1,'md'=>1,'xl'=>1,'2xl'=>1])->prefixIcon('chair')->prefixIconColor('icon')->label('میز')->relationship('table', 'title')->searchable()->preload()->required()->disableOptionWhen(fn (string $value): bool => \App\Models\Table::query()->firstWhere('id',$value)?->status === 'use'),
+                        Forms\Components\DatePicker::make('order_date')->columnSpan(['default'=>4,'sm'=>1,'md'=>1,'xl'=>1,'2xl'=>1])->default(now())->label('تاریخ ثبت سفارش')->jalali()->required(),
+                        Forms\Components\DatePicker::make('payment_date')->columnSpan(['default'=>4,'sm'=>1,'md'=>1,'xl'=>1,'2xl'=>1])->jalali()->default(now())->label('تاریخ پرداخت'),
+                        Forms\Components\ToggleButtons::make('status')->columnSpan(['default'=>4,'sm'=>2,'md'=>2,'xl'=>2,'2xl'=>2])->default('order')->options(InvoiceStatus::class)->label('وضعیت')->inline()->columnSpan(2)->required(),
                     ])->columns(4),
-
-
                 Repeater::make('products')->relationship('items')
                     ->label('محصولات')
-
                     ->schema([
                         Select::make('product_id')->label('محصول')->prefixIcon('fast-food')->prefixIconColor('icon')
                             ->relationship('product', 'title')->searchable()->preload()->live()->afterStateUpdated(function (Set $set, $state) {
@@ -77,21 +74,14 @@ class InvoiceResource extends Resource
                                     $set('price', null);
                                     $set('discount', null);
                                 }
-                            })->searchable()->preload()
-                            ->disableOptionsWhenSelectedInSiblingRepeaterItems()
-                            ->required(),
-
-                        TextInput::make('price')->prefix('تومان')->label('قیمت')
-
-                            ->live(true)->afterStateUpdated(function (Get $get, Set $set, $state) {
+                            })->searchable()->preload()->disableOptionsWhenSelectedInSiblingRepeaterItems()->required(),
+                        TextInput::make('price')->prefix('تومان')->label('قیمت')->live(true)->afterStateUpdated(function (Get $get, Set $set, $state) {
                                 if ($get('product_id')) {
                                     // dd($state);
                                     $product = Product::find($get('product_id'));
                                     $set('discount', getDiscountPercentage($product->price, str_replace(',','',$state)));
                                 }
-                            })
-                            ->required()->mask(RawJs::make('$money($input)'))->stripCharacters(','),
-
+                            })->required()->mask(RawJs::make('$money($input)'))->stripCharacters(','),
                         TextInput::make('count')->prefixIcon('count')->prefixIconColor('icon')->label('تعداد')->default(1)->numeric()->required(),
                         TextInput::make('discount')->prefixIconColor('icon')->prefixIcon('heroicon-c-receipt-percent')->label('درصد تخفیف')->default(0)->rules([
                                 fn(): Closure => function (string $attribute, $value, Closure $fail) {
@@ -100,11 +90,6 @@ class InvoiceResource extends Resource
                                     }
                                 }
                             ])->required(),
-
-
-
-
-
                     ])->columns(4)->columnSpanFull(),
 
                 // Forms\Components\TextInput::make('total_discount')
